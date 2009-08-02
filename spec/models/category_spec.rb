@@ -4,7 +4,7 @@ describe Category do
   before(:each) do
     @valid_attributes = {
       :name => "value for name",
-      :kind => "Income"
+      :kind => "value for kind"
     }
   end
 

@@ -1,6 +1,6 @@
-<h1>Editing categoly</h1>
+<h1>New category</h1>
 
-<% form_for(@categoly) do |f| %>
+<% form_for(@category) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -12,9 +12,8 @@
     <%= f.text_field :kind %>
   </p>
   <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit 'Create' %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @categoly %> |
-<%= link_to 'Back', categolies_path %>
+<%= link_to 'Back', categories_path %>

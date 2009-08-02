@@ -1,4 +1,4 @@
-class Categoly < ActiveRecord::Base
+class Category < ActiveRecord::Base
   validates_presence_of :name
   
   def validate
