@@ -2,7 +2,7 @@ class CreateCategolies < ActiveRecord::Migration
   def self.up
     create_table :categolies do |t|
       t.string :name
-      t.string :type
+      t.string :kind
 
       t.timestamps
     end

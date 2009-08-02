@@ -3,13 +3,13 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Type</th>
+    <th>Kind</th>
   </tr>
 
 <% @categolies.each do |categoly| %>
   <tr>
     <td><%=h categoly.name %></td>
-    <td><%=h categoly.type %></td>
+    <td><%=h categoly.kind %></td>
     <td><%= link_to 'Show', categoly %></td>
     <td><%= link_to 'Edit', edit_categoly_path(categoly) %></td>
     <td><%= link_to 'Destroy', categoly, :confirm => 'Are you sure?', :method => :delete %></td>
