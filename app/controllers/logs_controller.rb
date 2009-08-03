@@ -1,7 +1,9 @@
 class LogsController < ApplicationController
 
   def edit
-    @value = "#{params[:month]} #{params[:year]}"
+    @year, @month = params[:year], params[:month]
+    @accounts = Account.find(:all)
+    @categories = Category.sorted
   end
 
 end

@@ -1,3 +1,52 @@
-<h1>Logs#edit</h1>
-<%= @value %>
-<p>Find me in app/views/logs/edit.html.erb</p>
+<h1><%=h @year %>/<%=h @month %></h1>
+<% @accounts.each do |acc| %>
+  <h2><%=h acc.name %></h2>
+
+  <table border=1>
+    <tr>
+      <th rowspan="2">
+        Date
+      </th>
+      <% [:expense, :income, :move].each do |kind| %>
+        <th colspan="<%= @categories[kind].length * 2 %>">
+          <%=h kind.to_s.capitalize %>
+        </th>
+      <% end %>
+    </tr>
+
+    <tr>
+      <% [:expense, :income, :move].each do |kind| %>
+        <% @categories[kind].each do |cat| %>
+          <th colspan="2">
+            <%=h cat.name %>
+          </th>
+        <% end %>
+      <% end %>
+    </tr>
+
+    <% make_table_data(acc, @categories).each do |row| %>
+      <tr>
+        <% row.each do |item| %>
+          <% case item
+             when Date %>
+            <td>
+              <%=h item.to_s %>
+            </td>
+          <% when Income, Expense, Move %>
+            <td>
+              <%=h item.title %>
+            </td>
+            <td>
+              <%=h item.amount %>
+            </td>
+          <% else %>
+            <td>
+            </td>
+            <td>
+            </td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

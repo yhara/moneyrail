@@ -7,4 +7,14 @@ class Category < ActiveRecord::Base
     end
   end
 
+  def kind_class
+    Object.const_get(self.kind)
+  end
+
+  def self.sorted
+    {:income  => self.find(:all, :conditions => {:kind => "Income"}),
+     :expense => self.find(:all, :conditions => {:kind => "Expense"}),
+     :move    => self.find(:all, :conditions => {:kind => "Move"})} 
+  end
+
 end
