@@ -9,7 +9,7 @@
   </p>
   <p>
     <%= f.label :kind %><br />
-    <%= f.text_field :kind %>
+    <%= f.select :kind, %w(Income Expense Move).map{|x| [x, x]}  %>
   </p>
   <p>
     <%= f.submit 'Create' %>
