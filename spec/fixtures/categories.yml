@@ -1,9 +1,19 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+food_expense:
+  name: Food expense
+  kind: Expense
 
-one:
-  name: MyString
-  kind: MyString
+life_expense:
+  name: Life expense
+  kind: Expense
 
-two:
-  name: MyString
-  kind: MyString
+salary:
+  name: Sarary
+  kind: Income
+
+special:
+  name: Special
+  kind: Income
+
+withdraw:
+  name: Withdraw
+  kind: Move

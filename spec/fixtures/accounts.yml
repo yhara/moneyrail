@@ -1,7 +1,5 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+wallet:
+  name: Wallet
 
-one:
-  name: 手持ち
-
-two:
-  name: 山陰合同銀行
+bank:
+  name: Bank

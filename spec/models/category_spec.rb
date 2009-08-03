@@ -1,14 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Category do
-  before(:each) do
-    @valid_attributes = {
-      :name => "value for name",
-      :kind => "value for kind"
-    }
-  end
+  fixtures :categories
 
-  it "should create a new instance given valid attributes" do
-    Category.create!(@valid_attributes)
+  it "should have a name" do
+    categories(:food_expense).name.should == "Food expense"
   end
 end
