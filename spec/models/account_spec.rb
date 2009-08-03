@@ -3,11 +3,11 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Account do
   fixtures :accounts, :incomes
 
-  it "should have name" do
-    accounts(:wallet).name.should == "Wallet"
+  it "should be valid" do
+    accounts(:bank).should be_valid
   end
 
   it "should have incomes" do
-    accounts(:bank).incomes.should_not be_nil
+    accounts(:bank).should have(1).incomes
   end
 end
