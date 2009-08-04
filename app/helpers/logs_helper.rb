@@ -1,5 +1,6 @@
 module LogsHelper
-  # [Date(2009/8/1), nil, nil
+
+  # returns [Date(2009/8/1), nil, nil, Income, ..]
   def make_table_data(account, categories)
     cat_all = [:expense, :income, :move].map{|kind|
       categories[kind]
