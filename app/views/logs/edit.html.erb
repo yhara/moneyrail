@@ -28,7 +28,7 @@
       <% end %>
     </tr>
 
-    <% make_table_data(acc, @categories).each do |row| %>
+    <% make_table_data(acc).each do |row| %>
       <% row_number += 1 %>
       <tr id="row<%=h row_number%>">
         <td class="inserts">
@@ -41,7 +41,7 @@
             <td>
               <%=h item.to_s %>
             </td>
-          <% when Income, Expense, Move %>
+          <% when Item %>
             <td>
               <input type="text" value="<%=h item.title %>">
             </td>

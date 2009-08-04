@@ -1,21 +1,19 @@
 module LogsHelper
 
   # returns [Date(2009/8/1), nil, nil, Income, ..]
-  def make_table_data(account, categories)
-    cat_all = [:expense, :income, :move].map{|kind|
-      categories[kind]
-    }.flatten
+  def make_table_data(account)
+    cat_all = Category.sorted
 
+    condition = {
+      :conditions => {:date => @month_range},
+      :order => "date, index_of_day",
+    }
     items = [
-      account.expenses,
-      account.incomes,
-      account.moves_from,
-      account.moves_to,
+      account.expenses.all(condition),
+      account.incomes.all(condition),
+      account.moves_from.all(condition),
+      account.moves_to.all(condition),
     ].flatten
-#    items = cat_all.map{|cat|
-#      cat.kind_class.find(:all, :conditions => {:category_id => cat.id})
-#        # FIXME: Date check
-#    }.flatten
 
     items.map{|item|
       cat_all.map{|cat|

@@ -12,6 +12,15 @@ class Category < ActiveRecord::Base
   end
 
   def self.sorted
+    [
+      self.all(:conditions => {:kind => "Income"}),
+      self.all(:conditions => {:kind => "Expense"}),
+      self.all(:conditions => {:kind => "Move"}) 
+    ].flatten
+  end
+
+
+  def self.hashed
     {:income  => self.find(:all, :conditions => {:kind => "Income"}),
      :expense => self.find(:all, :conditions => {:kind => "Expense"}),
      :move    => self.find(:all, :conditions => {:kind => "Move"})} 
