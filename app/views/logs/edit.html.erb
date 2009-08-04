@@ -4,6 +4,8 @@
 
   <table class="editor">
     <tr>
+      <th class="inserts" rowspan="2">
+      </th>
       <th class="date" rowspan="2">
         Date
       </th>
@@ -26,6 +28,10 @@
 
     <% make_table_data(acc, @categories).each do |row| %>
       <tr>
+        <td class="inserts">
+          <span class="pushable">▽</span>
+        </td>
+
         <% row.each do |item| %>
           <% case item
              when Date %>
