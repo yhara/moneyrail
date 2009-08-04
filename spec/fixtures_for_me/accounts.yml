@@ -1,0 +1,8 @@
+wallet:
+  name: サイフ
+
+bank:
+  name: 銀行
+
+credit_card:
+  name: クレジットカード
