@@ -2,9 +2,9 @@
 <% @accounts.each do |acc| %>
   <h2><%=h acc.name %></h2>
 
-  <table border=1>
+  <table class="editor">
     <tr>
-      <th rowspan="2">
+      <th class="date" rowspan="2">
         Date
       </th>
       <% [:expense, :income, :move].each do |kind| %>
@@ -17,7 +17,7 @@
     <tr>
       <% [:expense, :income, :move].each do |kind| %>
         <% @categories[kind].each do |cat| %>
-          <th colspan="2">
+          <th class="category" colspan="2">
             <%=h cat.name %>
           </th>
         <% end %>
