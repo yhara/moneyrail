@@ -1,13 +1,7 @@
-require 'lib/item.rb'
-
-class Income < ActiveRecord::Base
-  include Item
-
+class Income < Item
+  belongs_to :account
+  
   # validations
 
   validates_presence_of :account
-
-  def validate
-    validate_category
-  end
 end

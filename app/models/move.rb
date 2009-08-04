@@ -1,8 +1,4 @@
-require 'lib/item.rb'
-
-class Move < ActiveRecord::Base
-  include Item
-
+class Move < Item
   belongs_to :account_from, :class_name => Account, :foreign_key => :account_id_from
   belongs_to :account_to, :class_name => Account, :foreign_key => :account_id_to
   
@@ -10,8 +6,4 @@ class Move < ActiveRecord::Base
 
   validates_presence_of :account_from
   validates_presence_of :account_to
-
-  def validate
-    validate_category
-  end
 end

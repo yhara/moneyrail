@@ -1,13 +1,7 @@
-require 'lib/item.rb'
-
-class Expense < ActiveRecord::Base
-  include Item
+class Expense < Item
+  belongs_to :account
   
   # validations
 
   validates_presence_of :account
-
-  def validate
-    validate_category
-  end
 end
