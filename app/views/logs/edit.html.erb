@@ -34,15 +34,17 @@
             </td>
           <% when Income, Expense, Move %>
             <td>
-              <%=h item.title %>
+              <input type="text" value="<%=h item.title %>">
             </td>
-            <td>
-              <%=h item.amount %>
+            <td class="number">
+              <input type="text" value="<%=h item.amount %>">
             </td>
           <% else %>
             <td>
+              <input type="text">
             </td>
-            <td>
+            <td class="number">
+              <input type="text">
             </td>
           <% end %>
         <% end %>

@@ -1,17 +1,38 @@
 table.editor {
   border-collapse: collapse;
 
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+
   td, th {
     border: 1px solid black;
   }
-  td {
+
+  th.date {
     width: 6em;
   }
 
   th.category {
     width: 12em;
   }
-  th.date {
+
+  td {
     width: 6em;
+
+    input {
+      width: 90%;
+      border: none;
+      font-size: 100%;
+      padding-left: 3px;
+    }
+  }
+
+  td.number {
+    input {
+      text-align: right;
+      padding-right: 3px;
+    }
   }
 }
