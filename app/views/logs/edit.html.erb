@@ -1,3 +1,14 @@
+<% javascript_tag do %>
+  var MoneyRail = MoneyRail || {};
+
+  MoneyRail.category_numbers = [
+    <%=h [:expense, :income, :move].map{|kind|
+        @categories[kind].length.to_s
+      }.join(", ") %>
+  ];
+<% end %>
+<% row_number = 0 %>
+
 <h1><%=h @year %>/<%=h @month %></h1>
 <% @accounts.each do |acc| %>
   <h2><%=h acc.name %></h2>
@@ -27,9 +38,10 @@
     </tr>
 
     <% make_table_data(acc, @categories).each do |row| %>
-      <tr>
+      <% row_number += 1 %>
+      <tr id="row<%=h row_number%>">
         <td class="inserts">
-          <span class="pushable">▽</span>
+          <span class="pushable" onclick="MoneyRail.insert_row(<%=h row_number%>);">▽</span>
         </td>
 
         <% row.each do |item| %>
