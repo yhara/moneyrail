@@ -1,12 +1,3 @@
-<% javascript_tag do %>
-  var MoneyRail = MoneyRail || {};
-
-  MoneyRail.category_numbers = [
-    <%=h [:expense, :income, :move].map{|kind|
-        @categories[kind].length.to_s
-      }.join(", ") %>
-  ];
-<% end %>
 <% row_number = 0 %>
 
 <h1><%=h @year %>/<%=h @month %></h1>
@@ -69,4 +60,16 @@
       </tr>
     <% end %>
   </table>
+<% end %>
+
+<% javascript_tag do %>
+  var MoneyRail = MoneyRail || {};
+
+  MoneyRail.last_row_number = <%=h row_number %>;
+
+  MoneyRail.category_numbers = [
+    <%=h [:expense, :income, :move].map{|kind|
+        @categories[kind].length.to_s
+      }.join(", ") %>
+  ];
 <% end %>
