@@ -1,19 +1,19 @@
 food_expense:
-  name: Food expense
+  name: 食費
   kind: Expense
 
 life_expense:
-  name: Life expense
+  name: 生活費
   kind: Expense
 
 salary:
-  name: Sarary
+  name: 給料
   kind: Income
 
 special:
-  name: Special
+  name: 臨時収入
   kind: Income
 
 withdraw:
-  name: Withdraw
+  name: 引き出し
   kind: Move

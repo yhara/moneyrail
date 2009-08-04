@@ -1,7 +1,82 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+juice:
+  type: Expense
+  title: ジュース
+  account: wallet
+  category: food_expense
+  amount: 120
+  index_of_day: 0
+  date: 2009-08-01
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+juice7:
+  type: Expense
+  title: ジュース
+  account: wallet
+  category: food_expense
+  amount: 170
+  index_of_day: 0
+  date: 2009-07-01
+
+juice9:
+  type: Expense
+  title: ジュース
+  account: wallet
+  category: food_expense
+  amount: 190
+  index_of_day: 0
+  date: 2009-09-01
+
+dinner:
+  type: Expense
+  title: 夕飯
+  account: wallet
+  category: food_expense
+  amount: 1000
+  index_of_day: 1
+  date: 2009-08-01
+
+dinner2:
+  type: Expense
+  title: 夕飯
+  account: wallet
+  category: food_expense
+  amount: 700
+  index_of_day: 0
+  date: 2009-08-02
+
+dentist:
+  type: Expense
+  title: 歯医者
+  account: wallet
+  category: life_expense
+  amount: 1230
+  index_of_day: 0
+  date: 2009-08-01
+
+august_sarary:
+  type: Income
+  title: 給料
+  account: wallet
+  category: salary
+  amount: 1000000
+  index_of_day: 0
+  date: 2009-08-02
+
+sending:
+  type: Move
+  title: 振り込み
+  account_from: wallet
+  account_to: bank
+  category: withdraw
+  amount: 10000
+  index_of_day: 0
+  date: 2009-08-02
+
+withdrawal:
+  type: Move
+  title: 引き出し
+  account_from: bank
+  account_to: wallet
+  category: withdraw
+  amount: 20000
+  index_of_day: 1
+  date: 2009-08-02

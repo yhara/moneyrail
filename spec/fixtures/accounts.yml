@@ -1,5 +1,8 @@
 wallet:
-  name: Wallet
+  name: サイフ
 
 bank:
-  name: Bank
+  name: 銀行
+
+credit_card:
+  name: クレジットカード
