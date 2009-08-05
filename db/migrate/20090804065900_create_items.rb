@@ -6,7 +6,7 @@ class CreateItems < ActiveRecord::Migration
       t.integer :amount
       t.integer :category_id
       t.date :date
-      t.integer :dindex
+      t.integer :position
       t.timestamps
 
       # for Expense, Income

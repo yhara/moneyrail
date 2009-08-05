@@ -3,7 +3,7 @@ class CreateCategories < ActiveRecord::Migration
     create_table :categories do |t|
       t.string :name
       t.string :kind
-      t.integer :kindex
+      t.integer :position
 
       t.timestamps
     end

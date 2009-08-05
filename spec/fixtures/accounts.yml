@@ -1,11 +1,11 @@
 wallet:
   name: サイフ
-  aindex: 0
+  position: 0
 
 bank:
   name: 銀行
-  aindex: 1
+  position: 1
 
 credit_card:
   name: クレジットカード
-  aindex: 2
+  position: 2

@@ -5,8 +5,8 @@ class Item < ActiveRecord::Base
 
   validates_presence_of :title, :date
 
-  validates_presence_of :amount, :dindex
-  validates_numericality_of :amount, :dindex
+  validates_presence_of :amount, :position
+  validates_numericality_of :amount, :position
 
   def validate
     # validate category
@@ -16,9 +16,7 @@ class Item < ActiveRecord::Base
 
     # validate index of day
     if same = self.find_conflict
-      errors.add("dindex", "index #{dindex} conflicts with #{same.title}")
+      errors.add("position", "position #{dindex} conflicts with #{same.title}")
     end
   end
-
-
 end

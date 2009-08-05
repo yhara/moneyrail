@@ -4,7 +4,7 @@ juice:
   account: wallet
   category: food_expense
   amount: 120
-  dindex: 0
+  position: 0
   date: 2009-08-01
 
 juice7:
@@ -13,7 +13,7 @@ juice7:
   account: wallet
   category: food_expense
   amount: 170
-  dindex: 0
+  position: 0
   date: 2009-07-01
 
 juice9:
@@ -22,7 +22,7 @@ juice9:
   account: wallet
   category: food_expense
   amount: 190
-  dindex: 0
+  position: 0
   date: 2009-09-01
 
 dinner:
@@ -31,7 +31,7 @@ dinner:
   account: wallet
   category: food_expense
   amount: 1000
-  dindex: 1
+  position: 1
   date: 2009-08-01
 
 dinner2:
@@ -40,7 +40,7 @@ dinner2:
   account: wallet
   category: food_expense
   amount: 700
-  dindex: 0
+  position: 0
   date: 2009-08-02
 
 dentist:
@@ -49,7 +49,7 @@ dentist:
   account: wallet
   category: life_expense
   amount: 1230
-  dindex: 0
+  position: 0
   date: 2009-08-01
 
 august_sarary:
@@ -58,7 +58,7 @@ august_sarary:
   account: wallet
   category: salary
   amount: 1000000
-  dindex: 0
+  position: 0
   date: 2009-08-02
 
 sending:
@@ -68,7 +68,7 @@ sending:
   account_to: bank
   category: withdraw
   amount: 10000
-  dindex: 0
+  position: 0
   date: 2009-08-02
 
 withdrawal:
@@ -78,5 +78,5 @@ withdrawal:
   account_to: wallet
   category: withdraw
   amount: 20000
-  dindex: 1
+  position: 1
   date: 2009-08-02

@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
-  validates_presence_of :name, :kindex
-  validates_numericality_of :kindex
-  validates_uniqueness_of :kindex
+  validates_presence_of :name, :position
+  validates_numericality_of :position
+  validates_uniqueness_of :position
   
   def validate
     unless %w(Income Expense Move).include?(self.kind)
@@ -9,18 +9,18 @@ class Category < ActiveRecord::Base
     end
   end
 
-  def kind_class
-    Object.const_get(self.kind)
-  end
+  # provides move_higher, move_lower, etc.
+  # categories are indexed in those of the same kind
+  acts_as_list :scope => 'kind == #{kind}'
 
   def self.hashed
     {
       :income =>
-      self.all(:conditions => {:kind => "Income"},  :order => "kindex"),
+      self.all(:conditions => {:kind => "Income"},  :order => "position"),
       :expense =>
-      self.all(:conditions => {:kind => "Expense"}, :order => "kindex"),
+      self.all(:conditions => {:kind => "Expense"}, :order => "position"),
       :move =>
-      self.all(:conditions => {:kind => "Move"},    :order => "kindex") 
+      self.all(:conditions => {:kind => "Move"},    :order => "position") 
     }
   end
 
