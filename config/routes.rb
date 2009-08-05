@@ -4,6 +4,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :categories
 
   map.resources :accounts
+  map.move_up_account 'accounts/:id/move_up',
+    :controller => :accounts, :action => :move_up
+  map.move_down_account 'accounts/:id/move_down',
+    :controller => :accounts, :action => :move_down
 
   map.connect 'logs/:year/:month', :controller => :logs, :action => 'edit'
 

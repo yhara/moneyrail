@@ -2,7 +2,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.xml
   def index
-    @accounts = Account.all
+    @accounts = Account.all(:order => "position")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -81,5 +81,19 @@ class AccountsController < ApplicationController
       format.html { redirect_to(accounts_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def move_up
+    @account = Account.find(params[:id])
+    @account.move_higher
+
+    redirect_to :action => :index
+  end
+
+  def move_down
+    @account = Account.find(params[:id])
+    @account.move_lower
+
+    redirect_to :action => :index
   end
 end
