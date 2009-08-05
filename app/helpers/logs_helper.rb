@@ -20,9 +20,10 @@ module LogsHelper
         max_position = todays.map(&:position).max
 
         (0..max_position).map{|i|
+          day = (i==0) ? today : :no_date
           @cat_all.map{|cat|
             todays.find{|m| m.category == cat && m.position == i}
-          }.unshift(today)
+          }.unshift(day)
         }
       end
     }.compact.flatten(1)

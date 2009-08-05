@@ -39,6 +39,8 @@
             <td>
               <%=h item.to_s %>
             </td>
+          <% when :no_date %>
+            <td></td>
           <% when Item %>
             <td>
               <input type="text" value="<%=h item.title %>">
