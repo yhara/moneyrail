@@ -11,7 +11,7 @@ class Category < ActiveRecord::Base
 
   # provides move_higher, move_lower, etc.
   # categories are indexed in those of the same kind
-  acts_as_list :scope => 'kind == #{kind}'
+  acts_as_list :scope => 'kind == \'#{kind}\''
 
   def self.hashed
     {
