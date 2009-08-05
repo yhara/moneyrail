@@ -6,8 +6,13 @@ class LogsController < ApplicationController
     first_day = Date.new(@year, @month)
     @month_range = first_day .. ((first_day >> 1) - 1)
 
-    @accounts = Account.find(:all)
+    @accounts = Account.all(:order => "aindex")
     @categories = Category.hashed
+    @cat_all = [
+      @categories[:expense],
+      @categories[:income],
+      @categories[:move],
+    ].flatten(1)
   end
 
 end

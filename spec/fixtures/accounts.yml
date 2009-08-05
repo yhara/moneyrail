@@ -1,8 +1,11 @@
 wallet:
   name: サイフ
+  aindex: 0
 
 bank:
   name: 銀行
+  aindex: 1
 
 credit_card:
   name: クレジットカード
+  aindex: 2

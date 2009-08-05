@@ -13,7 +13,7 @@ class Move < Item
       :account_id_from => account_id_from,
       :account_id_to => account_id_to,
       :category_id => category_id,
-      :index_of_day => index_of_day,
+      :dindex => dindex,
     })
   end
 end

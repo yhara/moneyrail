@@ -2,8 +2,6 @@ module LogsHelper
 
   # returns [Date(2009/8/1), nil, nil, Income, ..]
   def make_table_data(account)
-    cat_all = Category.sorted
-
     condition = {
       :conditions => {:date => @month_range},
       #:order => "date, index_of_day",
@@ -20,11 +18,11 @@ module LogsHelper
       if todays.empty?
         nil
       else
-        max_index = todays.map(&:index_of_day).max
+        max_index = todays.map(&:dindex).max
 
         (0..max_index).map{|i|
-          cat_all.map{|cat|
-            todays.find{|m| m.category == cat && m.index_of_day == i}
+          @cat_all.map{|cat|
+            todays.find{|m| m.category == cat && m.dindex == i}
           }.unshift(today)
         }
       end

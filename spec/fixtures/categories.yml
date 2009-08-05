@@ -1,19 +1,24 @@
 food_expense:
   name: 食費
   kind: Expense
+  kindex: 0
 
 life_expense:
   name: 生活費
   kind: Expense
+  kindex: 1
 
 salary:
   name: 給料
   kind: Income
+  kindex: 0
 
 special:
   name: 臨時収入
   kind: Income
+  kindex: 1
 
 withdraw:
   name: 引き出し
   kind: Move
+  kindex: 2

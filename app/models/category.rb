@@ -1,5 +1,7 @@
 class Category < ActiveRecord::Base
-  validates_presence_of :name
+  validates_presence_of :name, :kindex
+  validates_numericality_of :kindex
+  validates_uniqueness_of :kindex
   
   def validate
     unless %w(Income Expense Move).include?(self.kind)
@@ -11,19 +13,15 @@ class Category < ActiveRecord::Base
     Object.const_get(self.kind)
   end
 
-  def self.sorted
-    [
-      self.all(:conditions => {:kind => "Income"}),
-      self.all(:conditions => {:kind => "Expense"}),
-      self.all(:conditions => {:kind => "Move"}) 
-    ].flatten
-  end
-
-
   def self.hashed
-    {:income  => self.find(:all, :conditions => {:kind => "Income"}),
-     :expense => self.find(:all, :conditions => {:kind => "Expense"}),
-     :move    => self.find(:all, :conditions => {:kind => "Move"})} 
+    {
+      :income =>
+      self.all(:conditions => {:kind => "Income"},  :order => "kindex"),
+      :expense =>
+      self.all(:conditions => {:kind => "Expense"}, :order => "kindex"),
+      :move =>
+      self.all(:conditions => {:kind => "Move"},    :order => "kindex") 
+    }
   end
 
 end

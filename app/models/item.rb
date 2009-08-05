@@ -5,8 +5,8 @@ class Item < ActiveRecord::Base
 
   validates_presence_of :title, :date
 
-  validates_presence_of :amount, :index_of_day
-  validates_numericality_of :amount, :index_of_day
+  validates_presence_of :amount, :dindex
+  validates_numericality_of :amount, :dindex
 
   def validate
     # validate category
@@ -14,9 +14,9 @@ class Item < ActiveRecord::Base
       errors.add("category", "the category is not for #{self.class.to_s}")
     end
 
-    # validate index_of_day
+    # validate index of day
     if same = self.find_conflict
-      errors.add("index_of_day", "index #{index_of_day} conflicts with #{same.title}")
+      errors.add("dindex", "index #{dindex} conflicts with #{same.title}")
     end
   end
 

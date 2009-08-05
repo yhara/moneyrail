@@ -19,12 +19,10 @@
     </tr>
 
     <tr>
-      <% [:expense, :income, :move].each do |kind| %>
-        <% @categories[kind].each do |cat| %>
-          <th class="category" colspan="2">
-            <%=h cat.name %>
-          </th>
-        <% end %>
+      <% @cat_all.each do |cat| %>
+        <th class="category" colspan="2">
+          <%=h cat.name %>
+        </th>
       <% end %>
     </tr>
 

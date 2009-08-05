@@ -10,7 +10,7 @@ class Expense < Item
       :date => date, 
       :account_id => account_id,
       :category_id => category_id,
-      :index_of_day => index_of_day,
+      :dindex => dindex,
     })
   end
 end
