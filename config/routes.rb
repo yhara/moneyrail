@@ -2,6 +2,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :items
 
   map.resources :categories
+  map.move_up_category 'categories/:id/move_up',
+    :controller => :categories, :action => :move_up
+  map.move_down_category 'categories/:id/move_down',
+    :controller => :categories, :action => :move_down
 
   map.resources :accounts
   map.move_up_account 'accounts/:id/move_up',

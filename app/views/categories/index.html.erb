@@ -13,6 +13,8 @@
     <td><%= link_to 'Show', category %></td>
     <td><%= link_to 'Edit', edit_category_path(category) %></td>
     <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to '↑', move_up_category_path(category) %></td>
+    <td><%= link_to '↓', move_down_category_path(category) %></td>
   </tr>
 <% end %>
 </table>

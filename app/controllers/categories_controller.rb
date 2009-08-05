@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.xml
   def index
-    @categories = Category.all
+    @categories = Category.all(:order => "kind, position")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -81,5 +81,19 @@ class CategoriesController < ApplicationController
       format.html { redirect_to(categories_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def move_up
+    @account = Category.find(params[:id])
+    @account.move_higher
+
+    redirect_to :action => :index
+  end
+
+  def move_down
+    @account = Category.find(params[:id])
+    @account.move_lower
+
+    redirect_to :action => :index
   end
 end
