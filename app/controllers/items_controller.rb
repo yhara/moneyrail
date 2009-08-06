@@ -25,6 +25,8 @@ class ItemsController < ApplicationController
   # GET /items/new.xml
   def new
     @item = Item.new
+    @accounts = Account.all
+    @categories = Category.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +43,9 @@ class ItemsController < ApplicationController
   # POST /items.xml
   def create
     @item = Item.new(params[:item])
+    @item.type = params[:item][:type]
+    @accounts = Account.all
+    @categories = Category.all
 
     respond_to do |format|
       if @item.save

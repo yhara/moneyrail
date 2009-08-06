@@ -8,10 +8,20 @@ class Item < ActiveRecord::Base
   validates_presence_of :amount, :position
   validates_numericality_of :amount, :position
 
+  def find_conflict
+    Item.first(:conditions => {
+      :type => type,
+      :date => date, 
+      :account_id => account_id,
+      :category_id => category_id,
+      :position => position,
+    })
+  end
+
   def validate
     # validate category
-    unless self.category && self.category.kind == self.class.to_s
-      errors.add("category", "the category is not for #{self.class.to_s}")
+    unless self.category && self.category.kind == self.type
+      errors.add("category", "the category is not for #{self.type}")
     end
 
     # validate index of day
