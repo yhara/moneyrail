@@ -8,12 +8,13 @@ class SimpleItem < Item
   validates_presence_of :account
 
   def find_conflict
-    Expense.first(:conditions => {
+    Item.all(:conditions => {
+      :type => type,
       :date => date, 
       :account_id => account_id,
       :category_id => category_id,
       :position => position,
-    })
+    }).reject{|x| x.id == self.id}.first
   end
   
   # featues

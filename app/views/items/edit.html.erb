@@ -1,8 +1,41 @@
 <h1>Editing item</h1>
 
-<% form_for(@item) do |f| %>
+<% form_for :item, @item, :url => item_path(@item), :html => {:method => :put} do |f| %>
   <%= f.error_messages %>
 
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :amount %><br />
+    <%= f.text_field :amount %>
+  </p>
+  <p>
+    <%= f.label :type %><br />
+    <%= f.select :type, %w(Expense Income Move).map{|x| [x, x]}  %>
+  </p>
+  <p>
+    <%= f.label :category_id %><br />
+    <%= f.select :category_id, @categories.map{|c| [c.name, c.id]}  %>
+  </p>
+  <p>
+    <%= f.label :date %><br />
+    <%= f.text_field :date %>
+  </p>
+  <p>
+    <%= f.label :position %><br />
+    <%= f.text_field :position %>
+  </p>
+  <p id="one_account">
+    <%= f.label :account_id %><br />
+    <%= f.select :account_id, @accounts.map{|a| [a.name, a.id]}  %>
+  </p>
+  <p id="two_accounts">
+    <%= f.label :account_id_from %><br />
+    <%= f.select :account_id_from, @accounts.map{|a| [a.name, a.id]}  %>
+    → <%= f.select :account_id_to, @accounts.map{|a| [a.name, a.id]}  %>
+  </p>
   <p>
     <%= f.submit 'Update' %>
   </p>

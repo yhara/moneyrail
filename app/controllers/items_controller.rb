@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.xml
   def index
-    @items = Item.all(:order => "date DESC")
+    @items = Item.all(:order => "updated_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -37,6 +37,8 @@ class ItemsController < ApplicationController
   # GET /items/1/edit
   def edit
     @item = Item.find(params[:id])
+    @accounts = Account.all
+    @categories = Category.all
   end
 
   # POST /items
@@ -63,6 +65,8 @@ class ItemsController < ApplicationController
   # PUT /items/1.xml
   def update
     @item = Item.find(params[:id])
+    @accounts = Account.all
+    @categories = Category.all
 
     respond_to do |format|
       if @item.update_attributes(params[:item])
