@@ -1,8 +1,20 @@
 <% row_number = 0 %>
 
 <h1><%=h @year %>/<%=h @month %></h1>
-<% @accounts.each do |acc| %>
-  <h2><%=h acc.name %></h2>
+
+<ul>
+  <% @accounts.each_with_index do |account, i| %>
+    <li><%= link_to account.name, "#account_#{i}" %></li>
+  <% end %>
+</ul>
+
+<% @accounts.each_with_index do |account, i| %>
+  <a name="account_<%=h i%>" />
+  <h2>
+    <%=h account.name %>
+    <%= link_to '△', move_up_account_path(account) %>
+    <%= link_to '▽', move_down_account_path(account) %>
+  </h2>
 
   <table class="editor">
     <tr>
@@ -26,7 +38,7 @@
       <% end %>
     </tr>
 
-    <% make_table_data(acc).each do |row| %>
+    <% make_table_data(account).each do |row| %>
       <% row_number += 1 %>
       <tr id="row<%=h row_number%>">
         <td class="inserts">

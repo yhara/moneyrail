@@ -87,13 +87,13 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     @account.move_higher
 
-    redirect_to :action => :index
+    redirect_to :back
   end
 
   def move_down
     @account = Account.find(params[:id])
     @account.move_lower
 
-    redirect_to :action => :index
+    redirect_to :back
   end
 end
