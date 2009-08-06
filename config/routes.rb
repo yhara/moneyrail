@@ -1,5 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :items
+  # provides expense_path, etc. which is equal to items_path 
+  map.resources :expenses, :as => :items
+  map.resources :incomes, :as => :items
+  map.resources :moves, :as => :items
 
   map.resources :categories
   map.move_up_category 'categories/:id/move_up',

@@ -2,10 +2,28 @@
 
 <table>
   <tr>
+    <td>date</td>
+    <td>category</td>
+    <td>title</td>
+    <td>amount</td>
+    <td>account</td>
   </tr>
 
 <% @items.each do |item| %>
   <tr>
+    <td><%=h item.date %></td>
+    <td><%=h item.category.name %></td>
+    <td><%=h item.title %></td>
+    <td><%=h item.amount %></td>
+    <td>
+      <% if item.is_a?(Move) %>
+        <%=h item.account_from.name %>→<%=h item.account_to.name %>
+      <% elsif item.is_a?(Expense) %>
+        ←<%=h item.account.name %>
+      <% else %>
+        →<%=h item.account.name %>
+      <% end %>
+    </td>
     <td><%= link_to 'Show', item %></td>
     <td><%= link_to 'Edit', edit_item_path(item) %></td>
     <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -1,8 +1,8 @@
 class Move < Item
   # associations
   
-  belongs_to :account_from, :class_name => Account, :foreign_key => :account_id_from
-  belongs_to :account_to, :class_name => Account, :foreign_key => :account_id_to
+  belongs_to :account_from, :class_name => "Account", :foreign_key => :account_id_from
+  belongs_to :account_to, :class_name => "Account", :foreign_key => :account_id_to
 
   # validations
 
