@@ -15,7 +15,7 @@ module LogsHelper
     @month_range.map{|today|
       todays, items = items.partition{|m| m.date == today}
       if todays.empty?
-        nil
+        [[today] + ([nil] * @cat_all.size)]
       else
         max_position = todays.map(&:position).max
 
