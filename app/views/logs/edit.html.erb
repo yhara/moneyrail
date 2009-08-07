@@ -51,17 +51,17 @@
           <% when :no_date %>
             <td></td>
           <% when Item %>
-            <td>
+            <td class="title">
               <input type="text" value="<%=h item.title %>">
             </td>
-            <td class="number">
+            <td class="amount">
               <input type="text" value="<%=h item.amount %>">
             </td>
           <% else %>
-            <td>
+            <td class="title">
               <input type="text">
             </td>
-            <td class="number">
+            <td class="amount">
               <input type="text">
             </td>
           <% end %>
@@ -78,6 +78,10 @@
     <%=h [:expense, :income, :move].map{|kind|
         @categories[kind].length.to_s
       }.join(", ") %>
+  ];
+
+  MoneyRail.category_ids = [
+    <%=h @cat_all.map{|c| c.id.to_s}.join(", ") %>
   ];
 <% end %>
 

@@ -7,28 +7,37 @@ MoneyRail.raise = function(){
 };
 
 // refrection
-MoneyRail.get_acount_id = function(input_elem){
-  var table_elem = $j(input_elem).parents("table");
-  if(table_elem.length == 0){
-    MoneyRail.raise("table not found:", input_elem);
+MoneyRail.get_acount_id = function(input){
+  var table = $j(input).parents("table");
+  if(table.length == 0){
+    MoneyRail.raise("table not found:", input);
   }
-  return $j(table_elem).attr("title");
+  return $j(table).attr("title");
 };
-MoneyRail.get_date_and_position = function(input_elem){
-  var tr_elem = $j(input_elem).parents("tr");
-  if(tr_elem.length == 0){
-    MoneyRail.raise("tr not found:", input_elem);
+MoneyRail.get_date_and_position = function(input){
+  var tr = $j(input).parents("tr");
+  if(tr.length == 0){
+    MoneyRail.raise("tr not found:", input);
   }
-  var embeded = $j(tr_elem).attr("title");
+  var embeded = $j(tr).attr("title");
   return embeded.split(/_/);
+};
+MoneyRail.get_category_id = function(input){
+  var td = $j(input).parent("td");
+  if(td.length == 0){
+    MoneyRail.raise("td not found:", input);
+  }
+  var type = $j(td).attr("class"); // shall be 'title' or 'amount'
+  var idx = $j(td).parent().children("td." + type).index(td);
+  return MoneyRail.category_ids[idx];
 };
 
 MoneyRail.insert_row = function(elem){
   var make_tds = function(k){
     return $R(1, k).map(function(i){
       return [
-        "<td><input type='text'></td>",
-        "<td class='number'><input type='text'></td>"
+        "<td class='title'><input type='text'></td>",
+        "<td class='amount'><input type='text'></td>"
       ];
     });
   };
