@@ -1,5 +1,3 @@
-<% row_number = 0 %>
-
 <h1><%=h @year %>/<%=h @month %></h1>
 
 <ul>
@@ -12,8 +10,8 @@
   <a name="account_<%=h i%>" />
   <h2>
     <%=h account.name %>
-    <%= link_to '△', move_up_account_path(account) %>
-    <%= link_to '▽', move_down_account_path(account) %>
+    <%= link_to '笆ｳ', move_up_account_path(account) %>
+    <%= link_to '笆ｽ', move_down_account_path(account) %>
   </h2>
 
   <table class="editor">
@@ -39,10 +37,9 @@
     </tr>
 
     <% make_table_data(account).each do |row| %>
-      <% row_number += 1 %>
-      <tr id="row<%=h row_number%>">
+      <tr id="">
         <td class="inserts">
-          <span class="pushable" onclick="MoneyRail.insert_row(<%=h row_number%>);">▽</span>
+          <span class="pushable">笆ｽ</span>
         </td>
 
         <% row.each do |item| %>
@@ -76,8 +73,6 @@
 
 <% javascript_tag do %>
   var MoneyRail = MoneyRail || {};
-
-  MoneyRail.last_row_number = <%=h row_number %>;
 
   MoneyRail.category_numbers = [
     <%=h [:expense, :income, :move].map{|kind|

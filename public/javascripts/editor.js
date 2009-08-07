@@ -2,11 +2,7 @@ var $j = jQuery.noConflict();
 
 var MoneyRail = MoneyRail || {};
 
-MoneyRail.create_row_number = function(){
-  return (++MoneyRail.last_row_number);
-};
-
-MoneyRail.insert_row = function(n){
+MoneyRail.insert_row = function(elem){
   var make_tds = function(k){
     return $R(1, k).map(function(i){
       return [
@@ -16,13 +12,13 @@ MoneyRail.insert_row = function(n){
     });
   };
 
-  var new_row_number = MoneyRail.create_row_number();
-  $j("#row"+n).after([
-    "<tr id='row", new_row_number, "'>",
+  var row = $j(elem).parents("tr");
+
+  $j(row).after([
+    "<tr id=''>",
       // Button
       "<td class='inserts'>",
-        "<span class='pushable'",
-              "onclick='MoneyRail.insert_row(", new_row_number, ")'>",
+        "<span class='pushable'>",
           "▽",
         "</span>",
       "</td>",
@@ -41,14 +37,17 @@ MoneyRail.on_input_changed = function(e){
 };
 
 MoneyRail.register_events = function(){
-  var register_input_updated = function(){
-    $j.each($j("input"), function(input){
-      $j(input).change(function(e){
-        MoneyRail.on_input_changed(e);
-      });
+  // register input updated
+  $j.each($j("input"), function(input){
+    $j(input).change(function(e){
+      MoneyRail.on_input_changed(e);
     });
-  };
-  register_input_updated();
+  });
+  $j.each($j("span.pushable"), function(btn){
+    $j(btn).click(function(e){
+      MoneyRail.insert_row(e.target);
+    });
+  });
 };
 
 $j(function(){
