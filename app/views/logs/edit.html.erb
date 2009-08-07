@@ -10,11 +10,11 @@
   <a name="account_<%=h i%>" />
   <h2>
     <%=h account.name %>
-    <%= link_to '笆ｳ', move_up_account_path(account) %>
-    <%= link_to '笆ｽ', move_down_account_path(account) %>
+    <%= link_to '△', move_up_account_path(account) %>
+    <%= link_to '▽', move_down_account_path(account) %>
   </h2>
 
-  <table class="editor">
+  <table class="editor" title="<%=h account.id %>">
     <tr>
       <th class="inserts" rowspan="2">
       </th>
@@ -39,7 +39,7 @@
     <% make_table_data(account).each do |day, row| %>
       <tr title="<%=h day.strftime('%Y-%m-%d') %>">
         <td class="inserts">
-          <span class="pushable">笆ｽ</span>
+          <span class="pushable">▽</span>
         </td>
 
         <% row.each do |item| %>
@@ -82,4 +82,4 @@
 <% end %>
 
 <%= link_to 'back', root_path %>
-<!-- vim:set fenc=utf-8: -->
+<!-- この文字列は文字化け除けの文章です -->
