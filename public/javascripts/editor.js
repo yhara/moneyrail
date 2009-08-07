@@ -66,6 +66,12 @@ MoneyRail.insert_row = function(elem){
 
 // event handlers
 MoneyRail.on_input_changed = function(e){
+  var input = e.target;
+  $j(input).css("background", "#ffff99");
+  // do something
+  new Effect.Highlight(input, {
+    startcolor: "#ffff99", endcolor: "#ffffff", restorecolor: "#ffffff"
+  }); 
 };
 
 MoneyRail.register_events = function(){
