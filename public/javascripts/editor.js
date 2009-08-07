@@ -13,9 +13,10 @@ MoneyRail.insert_row = function(elem){
   };
 
   var row = $j(elem).parents("tr");
+  var date_str = row.attr("title");
 
   $j(row).after([
-    "<tr id=''>",
+    "<tr title='", date_str, "'>",
       // Button
       "<td class='inserts'>",
         "<span class='pushable'>",

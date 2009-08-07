@@ -36,8 +36,8 @@
       <% end %>
     </tr>
 
-    <% make_table_data(account).each do |row| %>
-      <tr id="">
+    <% make_table_data(account).each do |day, row| %>
+      <tr title="<%=h day.strftime('%Y-%m-%d') %>">
         <td class="inserts">
           <span class="pushable">笆ｽ</span>
         </td>
