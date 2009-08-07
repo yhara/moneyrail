@@ -36,6 +36,21 @@ MoneyRail.insert_row = function(n){
   ].join(""));
 };
 
+// event handlers
+MoneyRail.on_input_changed = function(e){
+};
+
+MoneyRail.register_events = function(){
+  var register_input_updated = function(){
+    $j.each($j("input"), function(input){
+      $j(input).change(function(e){
+        MoneyRail.on_input_changed(e);
+      });
+    });
+  };
+  register_input_updated();
+};
+
 $j(function(){
-  //alert("hi");
+  MoneyRail.register_events();
 });
