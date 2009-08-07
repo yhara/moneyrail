@@ -44,13 +44,12 @@ MoneyRail.register_events = function(){
       MoneyRail.on_input_changed(e);
     });
   });
-  $j.each($j("span.pushable"), function(btn){
-    $j(btn).click(function(e){
-      MoneyRail.insert_row(e.target);
-    });
+  $j("span.pushable").click(function(e){
+    MoneyRail.insert_row(e.target);
   });
 };
 
 $j(function(){
   MoneyRail.register_events();
 });
+<!-- この文字列は文字化け除けの文章です -->
