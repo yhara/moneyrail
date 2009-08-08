@@ -1,3 +1,5 @@
+@cell_width: 70px;
+
 table.editor {
   border-collapse: collapse;
 
@@ -10,20 +12,23 @@ table.editor {
     border: 1px solid black;
   }
 
-  th.inserts, td.inserts {
+  th.inserts{
     width: 1.5em;
   }
 
   th.date {
-    width: 6em;
+    min-width: @cell_width;
+    width: @cell_width;
   }
 
   th.category {
-    width: 12em;
+    min-width: @cell_width * 2;
+    width: @cell_width * 2;
   }
 
-  td {
-    width: 6em;
+  td.title, td.amount {
+    min-width: @cell_width;
+    width: @cell_width;
 
     input {
       width: 90%;
