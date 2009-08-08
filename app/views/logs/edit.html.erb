@@ -36,8 +36,9 @@
       <% end %>
     </tr>
 
-    <% make_table_data(account).each do |day, row| %>
-      <tr title="<%=h day.strftime('%Y-%m-%d') %>_0">
+    <% make_table_data(account).each_with_index do |(day, row), i| %>
+      <% tr_class = (i%2 == 0) ? "even" : "odd" %>
+      <tr title="<%=h day.strftime('%Y-%m-%d') %>_0" class="<%=h tr_class %>">
         <td>
           <span class="pushable">▽</span>
         </td>

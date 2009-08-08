@@ -12,6 +12,8 @@ table.editor {
     border: 1px solid black;
   }
 
+  // table head
+
   th.inserts{
     width: 1.5em;
   }
@@ -25,6 +27,16 @@ table.editor {
     min-width: @cell_width * 2;
     width: @cell_width * 2;
   }
+
+  // row
+
+  tr.even {
+  }
+  tr.odd, tr.odd input {
+    background: #f9f9ff;
+  }
+
+  // cell
 
   td.title, td.amount {
     min-width: @cell_width;
