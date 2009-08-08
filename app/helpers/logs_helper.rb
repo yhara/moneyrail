@@ -14,21 +14,18 @@ module LogsHelper
 
     @month_range.map{|today|
       todays, items = items.partition{|m| m.date == today}
-      if todays.empty?
-        [[today, [today] + ([nil] * @cat_all.size)]]
-      else
-        max_position = todays.map(&:position).max
+      positions = todays.map(&:position)
+      max_position = (positions.empty?) ? 0 : positions.max
 
-        (0..max_position).map{|i|
-          day = (i==0) ? today : :no_date
-          [
-            today,
-            @cat_all.map{|cat|
-              todays.find{|m| m.category == cat && m.position == i}
-            }.unshift(day)
-          ]
-        }
-      end
+      (0..max_position).map{|i|
+        day = (i==0) ? today : :no_date
+        [
+          today,
+          @cat_all.map{|cat|
+            todays.find{|m| m.category == cat && m.position == i}
+          }.unshift(day)
+        ]
+      }
     }.compact.flatten(1)
   end
 
