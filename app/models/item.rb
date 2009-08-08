@@ -16,7 +16,7 @@ class Item < ActiveRecord::Base
 
     # validate index of day
     if same = self.find_conflict
-      errors.add("position", "position #{position} conflicts with #{same.title} (#{same.class.inspect})")
+      errors.add("position", "position #{position} conflicts with #{same.title} (#{same.amount}, #{same.date})")
     end
   end
 end
