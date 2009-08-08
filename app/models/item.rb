@@ -2,6 +2,11 @@ class Item < ActiveRecord::Base
   belongs_to :category
 
   # validations
+  
+  def before_validation
+    self.title = "" if self.title.blank?
+    self.amount = 0 if self.amount.blank?
+  end
 
   validates_presence_of :title, :date
 

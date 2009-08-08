@@ -6,6 +6,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :incomes, :as => :items
   map.resources :moves, :as => :items
 
+  map.create_item 'items.:format',
+    :controller => :items, :action => :create,
+    :conditions => {:method => :post}
   map.update_item 'items/:id/update.:format',
     :controller => :items, :action => :update
 

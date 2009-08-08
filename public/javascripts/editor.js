@@ -15,10 +15,10 @@ MoneyRail.get_acount_id = function(input){
   }
   return $j(table).attr("title");
 };
-MoneyRail.get_date_and_position = function(input){
-  var tr = $j(input).parents("tr");
+MoneyRail.get_date_and_position = function(elem){
+  var tr = $j(elem).parents("tr");
   if(tr.length == 0){
-    MoneyRail.raise("tr not found:", input);
+    MoneyRail.raise("tr not found:", elem);
   }
   var embeded = $j(tr).attr("title");
   return embeded.split(/_/);
@@ -70,8 +70,8 @@ MoneyRail.insert_row = function(btn){
 
 // ajax
 
-MoneyRail.ajax_data = function(input){
-  var data = {authenticity_token: MoneyRail.authenticity_token};
+MoneyRail.ajax_data = function(input, _data){
+  var data = _data || {};
   var type = $j(input).parent("td").attr("class");
 
   if (type == "title" || type == "amount") {
@@ -82,6 +82,7 @@ MoneyRail.ajax_data = function(input){
     MoneyRail.raise("unknown type: " + type);
   }
 
+  data["authenticity_token"] = MoneyRail.authenticity_token;
   return data;
 };
 
@@ -94,6 +95,23 @@ MoneyRail.update_item = function(input, item_id, after){
 };
 
 MoneyRail.create_item = function(input, after){
+  var a = MoneyRail.get_date_and_position(input);
+  var data = MoneyRail.ajax_data(input, {
+    "item[date]": a[0],
+    "item[position]": a[1],
+    "item[account_id]": MoneyRail.get_acount_id(input),
+    "item[category_id]": MoneyRail.get_category_id(input),
+  });
+
+  $j.post(MoneyRail.item_create_path, data, function(result){
+    if (result[0] == "ok"){
+      var td = $j(input).parent("td");
+      td.attr("title", result[1]);
+      td.next().attr("title", result[1]);
+      
+      after();
+    }
+  }, "json");
 };
 
 // event handlers

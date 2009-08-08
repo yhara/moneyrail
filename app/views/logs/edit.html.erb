@@ -96,6 +96,7 @@
     var str = "<%=h update_item_path(9999) %>.json";
     return str.replace(/9999/, item_id);
   };
+  MoneyRail.item_create_path = "<%=h create_item_path %>.json";
 <% end %>
 
 <%= link_to 'back', root_path %>

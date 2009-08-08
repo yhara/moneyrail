@@ -51,12 +51,17 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        flash[:notice] = 'Item was successfully created.'
-        format.html { redirect_to(@item) }
+        format.html {
+          flash[:notice] = 'Item was successfully created.'
+          redirect_to(@item) 
+        }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
+        format.json { render :text => "['ok', #{@item.id}]" }
       else
+        logger.debug @item.errors.inspect
         format.html { render :action => "new" }
         format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+        format.json { render :text => "['error']" }
       end
     end
   end
