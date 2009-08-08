@@ -21,12 +21,13 @@ module LogsHelper
         day = (i==0) ? today : :no_date
         [
           today,
+          i == max_position, 
           @cat_all.map{|cat|
             todays.find{|m| m.category == cat && m.position == i}
           }.unshift(day)
         ]
       }
-    }.compact.flatten(1)
+    }.flatten(1)
   end
 
 end

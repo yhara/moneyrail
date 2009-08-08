@@ -33,7 +33,7 @@ MoneyRail.get_category_id = function(input){
   return MoneyRail.category_ids[idx];
 };
 
-MoneyRail.insert_row = function(elem){
+MoneyRail.insert_row = function(btn){
   var make_tds = function(k){
     return $R(1, k).map(function(i){
       return [
@@ -43,12 +43,14 @@ MoneyRail.insert_row = function(elem){
     });
   };
 
-  var a = MoneyRail.get_date_and_position(elem);
+  var a = MoneyRail.get_date_and_position(btn);
   var date = a[0], position = Number(a[1]);
-  var row = $j(elem).parents("tr");
+  var row = $j(btn).parents("tr");
+  var tr_class = ($j(row).attr("class") == "odd") ? "even" : "odd";
 
+  $j(btn).remove();
   $j(row).after([
-    "<tr title='", date, "_", (position+1), "'>",
+    "<tr title='", date, "_", (position+1), "' class='", tr_class, "'>",
       // Button
       "<td class='inserts'>",
         "<span class='pushable'>",
@@ -63,6 +65,7 @@ MoneyRail.insert_row = function(elem){
       MoneyRail.category_numbers.map(make_tds).flatten().join(""),
     "</tr>"
   ].join(""));
+  $j(row).next().find("span.pushable").click(MoneyRail.on_row_button_clicked);
 };
 
 // ajax
@@ -113,16 +116,16 @@ MoneyRail.on_input_changed = function(e){
   }
 };
 
+MoneyRail.on_row_button_clicked = function(e){
+  MoneyRail.insert_row(e.target);
+};
+
 MoneyRail.register_events = function(){
   // register input updated
   $j.each($j("input"), function(input){
-    $j(input).change(function(e){
-      MoneyRail.on_input_changed(e);
-    });
+    $j(input).change(MoneyRail.on_input_changed);
   });
-  $j("span.pushable").click(function(e){
-    MoneyRail.insert_row(e.target);
-  });
+  $j("span.pushable").click(MoneyRail.on_row_button_clicked);
 };
 
 $j(function(){

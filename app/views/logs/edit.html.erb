@@ -36,11 +36,13 @@
       <% end %>
     </tr>
 
-    <% make_table_data(account).each_with_index do |(day, row), i| %>
+    <% make_table_data(account).each_with_index do |(day, btn, row), i| %>
       <% tr_class = (i%2 == 0) ? "even" : "odd" %>
       <tr title="<%=h day.strftime('%Y-%m-%d') %>_0" class="<%=h tr_class %>">
         <td>
-          <span class="pushable">▽</span>
+          <% if btn %>
+            <span class="pushable">▽</span>
+          <% end %>
         </td>
 
         <% row.each do |item| %>
@@ -49,8 +51,10 @@
             <td>
               <%=h item.to_s %>
             </td>
+
           <% when :no_date %>
             <td></td>
+
           <% when Item %>
             <td class="title" title="<%=h item.id %>">
               <input type="text" value="<%=h item.title %>">
@@ -58,6 +62,7 @@
             <td class="amount" title="<%=h item.id %>">
               <input type="text" value="<%=h item.amount %>">
             </td>
+
           <% else %>
             <td class="title">
               <input type="text">
