@@ -9,14 +9,14 @@ class Move < Item
   validates_presence_of :account_from
   validates_presence_of :account_to
 
-  def find_conflict
+  def self.find_conflict(item)
     Move.all(:conditions => {
-      :date => date, 
-      :account_id_from => account_id_from,
-      :account_id_to => account_id_to,
-      :category_id => category_id,
-      :position => position,
-    }).reject{|x| x.id == self.id}.first
+      :date => item.date,
+      :account_id_from => item.account_id_from,
+      :account_id_to => item.account_id_to,
+      :category_id => item.category_id,
+      :position => item.position,
+    }).reject{|x| x.id == item.id}.first
   end
 
   def validate

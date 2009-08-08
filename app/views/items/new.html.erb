@@ -12,10 +12,6 @@
     <%= f.text_field :amount %>
   </p>
   <p>
-    <%= f.label :type %><br />
-    <%= f.select :type, %w(Expense Income Move).map{|x| [x, x]}  %>
-  </p>
-  <p>
     <%= f.label :category_id %><br />
     <%= f.select :category_id, @categories.map{|c| [c.name, c.id]}  %>
   </p>

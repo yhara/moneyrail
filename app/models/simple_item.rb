@@ -7,14 +7,14 @@ class SimpleItem < Item
 
   validates_presence_of :account
 
-  def find_conflict
+  def self.find_conflict(item)
     Item.all(:conditions => {
-      :type => type,
-      :date => date, 
-      :account_id => account_id,
-      :category_id => category_id,
-      :position => position,
-    }).reject{|x| x.id == self.id}.first
+      :type => item.type,
+      :date => item.date, 
+      :account_id => item.account_id,
+      :category_id => item.category_id,
+      :position => item.position,
+    }).reject{|x| x.id == item.id}.first
   end
   
   # featues

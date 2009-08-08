@@ -45,7 +45,7 @@ class ItemsController < ApplicationController
   # POST /items.xml
   def create
     @item = Item.new(params[:item])
-    @item.type = params[:item][:type]
+    @item.type = @item.category.kind
     @accounts = Account.all
     @categories = Category.all
 
