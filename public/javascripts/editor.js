@@ -4,6 +4,7 @@ var MoneyRail = MoneyRail || {};
 
 MoneyRail.raise = function(){
   $j.each(arguments, console.error);
+  throw arguments[0];
 };
 
 // refrection
@@ -66,7 +67,7 @@ MoneyRail.insert_row = function(elem){
 
 // ajax
 
-MoneyRail.update_item = function(input, item_id, after){
+MoneyRail.ajax_data = function(input){
   var data = {authenticity_token: MoneyRail.authenticity_token};
   var type = $j(input).parent("td").attr("class");
 
@@ -77,6 +78,12 @@ MoneyRail.update_item = function(input, item_id, after){
   else {
     MoneyRail.raise("unknown type: " + type);
   }
+
+  return data;
+};
+
+MoneyRail.update_item = function(input, item_id, after){
+  var data = MoneyRail.ajax_data(input);
 
   $j.post(MoneyRail.item_update_path(item_id), data, function(result){
     if (result == "ok") after();
