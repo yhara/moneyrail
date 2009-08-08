@@ -51,10 +51,10 @@
           <% when :no_date %>
             <td></td>
           <% when Item %>
-            <td class="title">
+            <td class="title" title="<%=h item.id %>">
               <input type="text" value="<%=h item.title %>">
             </td>
-            <td class="amount">
+            <td class="amount" title="<%=h item.id %>">
               <input type="text" value="<%=h item.amount %>">
             </td>
           <% else %>
@@ -74,6 +74,8 @@
 <% javascript_tag do %>
   var MoneyRail = MoneyRail || {};
 
+  MoneyRail.authenticity_token = '<%=h form_authenticity_token %>';
+
   MoneyRail.category_numbers = [
     <%=h [:expense, :income, :move].map{|kind|
         @categories[kind].length.to_s
@@ -83,6 +85,11 @@
   MoneyRail.category_ids = [
     <%=h @cat_all.map{|c| c.id.to_s}.join(", ") %>
   ];
+
+  MoneyRail.item_update_path = function(item_id){
+    var str = "<%=h update_item_path(9999) %>.json";
+    return str.replace(/9999/, item_id);
+  };
 <% end %>
 
 <%= link_to 'back', root_path %>

@@ -64,14 +64,46 @@ MoneyRail.insert_row = function(elem){
   ].join(""));
 };
 
+// ajax
+
+MoneyRail.update_item = function(input, item_id, after){
+  var data = {authenticity_token: MoneyRail.authenticity_token};
+  var type = $j(input).parent("td").attr("class");
+
+  if (type == "title" || type == "amount") {
+    var key = "item[" + type + "]";
+    data[key] = $j(input).val();
+  }
+  else {
+    MoneyRail.raise("unknown type: " + type);
+  }
+
+  $j.post(MoneyRail.item_update_path(item_id), data, function(result){
+    if (result == "ok") after();
+  }, "json");
+};
+
+MoneyRail.create_item = function(input, after){
+};
+
 // event handlers
 MoneyRail.on_input_changed = function(e){
   var input = e.target;
+  var end_highlight = function(){
+    new Effect.Highlight(input, {
+      startcolor: "#ffff99", endcolor: "#ffffff", restorecolor: "#ffffff"
+    }); 
+  }
+
   $j(input).css("background", "#ffff99");
-  // do something
-  new Effect.Highlight(input, {
-    startcolor: "#ffff99", endcolor: "#ffffff", restorecolor: "#ffffff"
-  }); 
+
+  var item_id = $j(input).parent("td").attr("title");
+  if (item_id) {
+    MoneyRail.update_item(input, item_id, end_highlight);
+  }
+  else {
+    MoneyRail.create_item(input, end_highlight);
+  }
 };
 
 MoneyRail.register_events = function(){

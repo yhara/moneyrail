@@ -1,22 +1,29 @@
 ActionController::Routing::Routes.draw do |map|
+  # -- item
   map.resources :items
   # provides expense_path, etc. which is equal to items_path 
   map.resources :expenses, :as => :items
   map.resources :incomes, :as => :items
   map.resources :moves, :as => :items
 
+  map.update_item 'items/:id/update.:format',
+    :controller => :items, :action => :update
+
+  # -- category
   map.resources :categories
   map.move_up_category 'categories/:id/move_up',
     :controller => :categories, :action => :move_up
   map.move_down_category 'categories/:id/move_down',
     :controller => :categories, :action => :move_down
 
+  # -- account
   map.resources :accounts
   map.move_up_account 'accounts/:id/move_up',
     :controller => :accounts, :action => :move_up
   map.move_down_account 'accounts/:id/move_down',
     :controller => :accounts, :action => :move_down
 
+  # -- log
   map.edit_logs 'logs/:year/:month', :controller => :logs, :action => 'edit'
 
   # The priority is based upon order of creation: first created -> highest priority.
