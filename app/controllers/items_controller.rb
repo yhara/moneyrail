@@ -80,11 +80,11 @@ class ItemsController < ApplicationController
           redirect_to(@item) 
         }
         format.xml  { head :ok }
-        format.json { render :text => "'ok'" }
+        format.json { render :text => "['ok']" }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
-        format.json { render :text => "'error'" }
+        format.json { render :text => "['error']" }
       end
     end
   end

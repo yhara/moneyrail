@@ -90,7 +90,7 @@ MoneyRail.update_item = function(input, item_id, after){
   var data = MoneyRail.ajax_data(input);
 
   $j.post(MoneyRail.item_update_path(item_id), data, function(result){
-    if (result == "ok") after();
+    if (result[0] == "ok") after();
   }, "json");
 };
 
