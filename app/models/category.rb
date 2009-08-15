@@ -1,7 +1,6 @@
 class Category < ActiveRecord::Base
-  validates_presence_of :name, :position
-  validates_numericality_of :position
-  validates_uniqueness_of :position
+  validates_presence_of :name
+  validates_uniqueness_of :name
   
   def validate
     unless %w(Income Expense Move).include?(self.kind)
