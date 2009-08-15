@@ -28,4 +28,5 @@ Jeweler::Tasks.new do |gemspec|
   gemspec.authors = ["Yutaka HARA"]
   gemspec.add_dependency('rails', '= 2.3.3')
   gemspec.add_dependency('ruby-station-runtime', '>= 0.0.2')
+  gemspec.files.concat Dir["vendor/plugins/acts_as_list/*"]
 end
