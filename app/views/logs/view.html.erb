@@ -16,8 +16,10 @@
 
   <table class="editor" title="<%=h account.id %>">
     <tr>
+      <% if @mode == :edit %>
       <th class="inserts" rowspan="2">
       </th>
+      <% end %>
       <th class="date" rowspan="2">
         Date
       </th>
@@ -39,11 +41,13 @@
     <% make_table_data(account).each_with_index do |(day, btn, row), i| %>
       <% tr_class = (i%2 == 0) ? "even" : "odd" %>
       <tr title="<%=h day.strftime('%Y-%m-%d') %>_0" class="<%=h tr_class %>">
+        <% if @mode == :edit %>
         <td>
           <% if btn %>
             <span class="pushable">▽</span>
           <% end %>
         </td>
+        <% end %>
 
         <% row.each do |item| %>
           <% case item
@@ -57,19 +61,15 @@
 
           <% when Item %>
             <td class="title" title="<%=h item.id %>">
-              <input type="text" value="<%=h item.title %>">
+              <%= cell(item.title) %>
             </td>
             <td class="amount" title="<%=h item.id %>">
-              <input type="text" value="<%=h item.amount %>">
+              <%= cell(item.amount) %>
             </td>
 
           <% else %>
-            <td class="title">
-              <input type="text">
-            </td>
-            <td class="amount">
-              <input type="text">
-            </td>
+            <td class="title"><%= cell("") %></td>
+            <td class="amount"><%= cell("") %></td>
           <% end %>
         <% end %>
       </tr>

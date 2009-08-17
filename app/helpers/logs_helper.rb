@@ -1,5 +1,13 @@
 module LogsHelper
 
+  def cell(value)
+    if @mode == :edit
+      "<input type='text' value='#{h value}' />"
+    else
+      "<div>#{h value}</div>"
+    end
+  end
+
   # returns [Date(2009/8/1), nil, nil, Income, ..]
   def make_table_data(account)
     condition = {
