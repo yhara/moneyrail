@@ -27,7 +27,10 @@ ActionController::Routing::Routes.draw do |map|
     :controller => :accounts, :action => :move_down
 
   # -- log
-  map.edit_logs 'logs/:year/:month', :controller => :logs, :action => 'edit'
+  map.show_logs 'logs/:year/:month',
+    :controller => :logs, :action => 'view', :mode => :show
+  map.edit_logs 'logs/:year/:month/edit',
+    :controller => :logs, :action => 'view', :mode => :edit
 
   # The priority is based upon order of creation: first created -> highest priority.
 

@@ -1,6 +1,7 @@
 class LogsController < ApplicationController
 
-  def edit
+  def view
+    @mode = params[:mode]
     @year, @month = params[:year].to_i, params[:month].to_i
 
     first_day = Date.new(@year, @month)

@@ -80,6 +80,8 @@
 <% javascript_tag do %>
   var MoneyRail = MoneyRail || {};
 
+  MoneyRail.editable = <%=h (@mode == :edit) ? "true" : "false" %>;
+
   MoneyRail.authenticity_token = '<%=h form_authenticity_token %>';
 
   MoneyRail.category_numbers = [
