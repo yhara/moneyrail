@@ -70,20 +70,35 @@ MoneyRail.insert_row = function(btn){
 
 // ajax
 
+// Sets item[title], item[amount] and authenticity_token
 MoneyRail.ajax_data = function(input, _data){
   var data = _data || {};
-  var type = $j(input).parent("td").attr("class");
 
-  if (type == "title" || type == "amount") {
-    var key = "item[" + type + "]";
-    data[key] = $j(input).val();
-  }
-  else {
-    MoneyRail.raise("unknown type: " + type);
+  if (input) {
+    var type = $j(input).parent("td").attr("class");
+    if (type == "title" || type == "amount") {
+      var key = "item[" + type + "]";
+      data[key] = $j(input).val();
+    }
+    else {
+      MoneyRail.raise("unknown type: " + type);
+    }
   }
 
   data["authenticity_token"] = MoneyRail.authenticity_token;
   return data;
+};
+
+MoneyRail.destroy_item = function(input, item_id, after){
+  var data = MoneyRail.ajax_data(null, {_method: "delete"});
+
+  $j.post(MoneyRail.item_destroy_path(item_id), data, function(result){
+    if (result[0] == "ok"){
+      $j("td[title='"+item_id+"']").attr("title", "");
+
+      after();
+    }
+  }, "json");
 };
 
 MoneyRail.update_item = function(input, item_id, after){
@@ -107,7 +122,12 @@ MoneyRail.create_item = function(input, after){
     if (result[0] == "ok"){
       var td = $j(input).parent("td");
       td.attr("title", result[1]);
-      td.next().attr("title", result[1]);
+      if (td.attr("class") == "title"){
+        td.next().attr("title", result[1]);
+      }
+      else {
+        td.prev().attr("title", result[1]);
+      }
       
       after();
     }
@@ -122,12 +142,25 @@ MoneyRail.on_input_changed = function(e){
       startcolor: "#ffff99", endcolor: "#ffffff", restorecolor: "#ffffff"
     }); 
   }
+  var is_delete = function(item_id){
+    var empty = /^(\s*)$/;
+    var title = $j("td[class='title'][title='"+item_id+"'] input").val();
+    var amount = $j("td[class='amount'][title='"+item_id+"'] input").val();
+
+    return empty.match(title) && empty.match(amount);
+  }
 
   $j(input).css("background", "#ffff99");
 
   var item_id = $j(input).parent("td").attr("title");
   if (item_id) {
-    MoneyRail.update_item(input, item_id, end_highlight);
+    if (is_delete(item_id)){
+      console.log("delete")
+      MoneyRail.destroy_item(input, item_id, end_highlight);
+    }
+    else {
+      MoneyRail.update_item(input, item_id, end_highlight);
+    }
   }
   else {
     MoneyRail.create_item(input, end_highlight);
