@@ -1,5 +1,7 @@
 2009-08-19  Yutaka HARA  <yhara(at)kmc.gr.jp>
 
+	* Released 0.0.1
+
   * new: delete an item when title and amount are both empty
 
   * fix: item deletion raises an error
