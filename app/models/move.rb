@@ -29,9 +29,9 @@ class Move < Item
   # featues
 
   acts_as_list :scope => [
-    'date => #{date}',
-    'account_id_from => #{account_id_from}',
-    'account_id_to => #{account_id_to}',
-    'category_id => #{category_id}',
+    'date = #{date}',
+    'account_id_from = #{account_id_from}',
+    'account_id_to = #{account_id_to}',
+    'category_id = #{category_id}',
   ].join(" AND ")
 end
