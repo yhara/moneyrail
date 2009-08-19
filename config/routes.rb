@@ -11,6 +11,8 @@ ActionController::Routing::Routes.draw do |map|
     :conditions => {:method => :post}
   map.update_item 'items/:id/update.:format',
     :controller => :items, :action => :update
+  map.destroy_item 'items/:id/destroy.:format',
+    :controller => :items, :action => :destroy
 
   # -- category
   map.resources :categories
