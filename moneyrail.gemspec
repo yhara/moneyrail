@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{moneyrail}
-  s.version = "0.0.0"
+  s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Yutaka HARA"]
-  s.date = %q{2009-08-16}
+  s.date = %q{2009-08-19}
   s.description = %q{Household account book, written in Rails}
   s.email = %q{yutaka.hara/at/gmail.com}
   s.extra_rdoc_files = [
@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.files = [
     ".gitignore",
      ".gitmodules",
+     "Changelog",
      "README",
      "Rakefile",
      "VERSION",
@@ -50,11 +51,8 @@ Gem::Specification.new do |s|
      "app/views/items/index.html.erb",
      "app/views/items/new.html.erb",
      "app/views/items/show.html.erb",
-     "app/views/layouts/accounts.html.erb",
-     "app/views/layouts/categories.html.erb",
-     "app/views/layouts/items.html.erb",
-     "app/views/layouts/logs.html.erb",
-     "app/views/logs/edit.html.erb",
+     "app/views/layouts/application.html.erb",
+     "app/views/logs/view.html.erb",
      "config/boot.rb",
      "config/database.yml",
      "config/environment.rb",
@@ -80,6 +78,7 @@ Gem::Specification.new do |s|
      "lib/tasks/cucumber.rake",
      "lib/tasks/rspec.rake",
      "main.rb",
+     "moneyrail.gemspec",
      "public/404.html",
      "public/422.html",
      "public/500.html",
