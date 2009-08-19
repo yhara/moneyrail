@@ -1,5 +1,7 @@
 2009-08-19  Yutaka HARA  <yhara(at)kmc.gr.jp>
 
+  * new: delete an item when title and amount are both empty
+
   * fix: item deletion raises an error
 
 	* fix: fails to update cells whose position > 0
