@@ -7,6 +7,7 @@
 </ul>
 
 <% @accounts.each_with_index do |account, i| %>
+  <%# for each account %>
   <a name="account_<%=h i%>" />
   <h2>
     <%=h account.name %>
@@ -14,7 +15,9 @@
     <%= link_to '▽', move_down_account_path(account) %>
   </h2>
 
+  <%# table %>
   <table class="editor" title="<%=h account.id %>">
+    <%# first row %>
     <tr>
       <% if @mode == :edit %>
       <th class="inserts" rowspan="2">
@@ -38,9 +41,12 @@
       <% end %>
     </tr>
 
-    <% make_table_data(account).each_with_index do |(day, btn, row), i| %>
-      <% tr_class = (i%2 == 0) ? "even" : "odd" %>
-      <tr title="<%=h day.strftime('%Y-%m-%d') %>_0" class="<%=h tr_class %>">
+    <% make_table_data(account).each_with_index do |(day, i, btn, row), k| %>
+      <%# for each row %>
+      <% tr_class = (k%2 == 0) ? "even" : "odd" %>
+      <tr title="<%=h day.strftime('%Y-%m-%d') %>_<%=h i %>" class="<%=h tr_class %>">
+
+        <%# first cell %>
         <% if @mode == :edit %>
         <td>
           <% if btn %>
@@ -50,6 +56,8 @@
         <% end %>
 
         <% row.each do |item| %>
+          <%# for each cell %>
+
           <% case item
              when Date %>
             <td>

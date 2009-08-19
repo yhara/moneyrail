@@ -29,6 +29,7 @@ module LogsHelper
         day = (i==0) ? today : :no_date
         [
           today,
+          i,
           i == max_position, 
           @cat_all.map{|cat|
             todays.find{|m| m.category == cat && m.position == i}
