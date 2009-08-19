@@ -1,4 +1,4 @@
-<h1><%=h @year %>/<%=h @month %></h1>
+<h2><%=h @year %>/<%=h @month %></h2>
 
 <ul>
   <% @accounts.each_with_index do |account, i| %>
@@ -9,11 +9,11 @@
 <% @accounts.each_with_index do |account, i| %>
   <%# for each account %>
   <a name="account_<%=h i%>" />
-  <h2>
+  <h3>
     <%=h account.name %>
     <%= link_to '△', move_up_account_path(account) %>
     <%= link_to '▽', move_down_account_path(account) %>
-  </h2>
+  </h3>
 
   <%# table %>
   <table class="editor" title="<%=h account.id %>">
