@@ -1,5 +1,11 @@
 <ul>
   <li><%= link_to 'Accounts', accounts_path %></li>
   <li><%= link_to 'Categories', categories_path %></li>
-  <li><%= link_to 'Logs: 2009-08', edit_logs_path(:year => 2009, :month => 8) %></li>
+  <li><%= link_to 'Items', items_path %></li>
+</ul>
+<ul>
+  <% @months.each do |m| %>
+    <li><%= link_to "Logs: #{m.year}-#{m.month}",
+              edit_logs_path(:year => m.year, :month => m.month) %></li>
+  <% end %>
 </ul>
