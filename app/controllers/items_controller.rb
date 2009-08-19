@@ -82,6 +82,7 @@ class ItemsController < ApplicationController
         format.xml  { head :ok }
         format.json { render :text => "['ok']" }
       else
+        logger.debug @item.errors.inspect
         format.html { render :action => "edit" }
         format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
         format.json { render :text => "['error']" }
@@ -98,6 +99,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(items_url) }
       format.xml  { head :ok }
+      format.json { render :text => "['ok']" }
     end
   end
 end
