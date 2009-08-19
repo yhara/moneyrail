@@ -15,5 +15,6 @@ class LogsController < ApplicationController
       @categories[:move],
     ].flatten(1)
   end
+  attr_reader :mode
 
 end

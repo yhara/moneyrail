@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+  <%= stylesheet_link_tag 'scaffold' %>
+
+  <% if controller.controller_name == "logs" %>
+    <title>MoneyRail : Logs: <%=h @year %>/<%=h @month %></title>
+    <%= stylesheet_link_tag 'editor' %>
+
+    <% if controller.mode == :edit %>
+      <%= javascript_include_tag 'prototype' %>
+      <%= javascript_include_tag 'effects' %>
+      <%= javascript_include_tag 'jquery' %>
+      <%= javascript_include_tag 'editor' %>
+    <% end %>
+  <% else %>
+    <title>MoneyRail :
+      <%=h controller.controller_name.camelcase %>:
+      <%= controller.action_name %>
+    </title>
+  <% end %>
+</head>
+<body>
+
+  <h1><%= link_to "MoneyRail", :controller => :home %></h1>
+
+  <p style="color: green"><%= flash[:notice] %></p>
+
+  <%= yield %>
+
+</body>
+</html>
+
