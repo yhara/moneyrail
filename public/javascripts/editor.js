@@ -146,9 +146,9 @@ MoneyRail.register_events = function(){
   $j("span.pushable").click(MoneyRail.on_row_button_clicked);
 };
 
-if(MoneyRail.editable){
-  $j(function(){
+$j(function(){
+  if(MoneyRail.editable){
     MoneyRail.register_events();
-  });
-}
+  }
+});
 <!-- この文字列は文字化け除けの文章です -->
