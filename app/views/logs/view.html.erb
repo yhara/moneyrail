@@ -1,4 +1,7 @@
 <h2><%=h @year %>/<%=h @month %></h2>
+<% unless @mode == :edit %>
+  <%= link_to "(edit)", edit_logs_path(:year => @year, :month => @month) %>
+<% end %>
 
 <ul>
   <% @accounts.each_with_index do |account, i| %>

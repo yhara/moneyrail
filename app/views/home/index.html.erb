@@ -5,7 +5,11 @@
 </ul>
 <ul>
   <% @months.each do |m| %>
-    <li><%= link_to "Logs: #{m.year}-#{m.month}",
-              edit_logs_path(:year => m.year, :month => m.month) %></li>
+    <li>
+      <%= link_to "Logs: #{m.year}-#{m.month}",
+        show_logs_path(:year => m.year, :month => m.month) %>
+      <%= link_to "(edit)",
+        edit_logs_path(:year => m.year, :month => m.month) %>
+    </li>
   <% end %>
 </ul>
