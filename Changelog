@@ -1,0 +1,15 @@
+2009-08-19  Yutaka HARA  <yhara(at)kmc.gr.jp>
+
+	* fix: fails to update cells whose position > 0
+
+2009-08-17  Yutaka HARA  <yhara(at)kmc.gr.jp>
+
+	* new: show logs
+
+2009-08-16  Yutaka HARA  <yhara(at)kmc.gr.jp>
+
+	* Released 0.0.0
+
+
+
+
