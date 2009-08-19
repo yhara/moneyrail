@@ -4,11 +4,11 @@ class Item < ActiveRecord::Base
   # validations
   
   def before_validation
-    self.title = "" if self.title.blank?
+    self.title = "" if self.title.nil?
     self.amount = 0 if self.amount.blank?
   end
 
-  validates_presence_of :title, :date
+  validates_presence_of :date
 
   validates_presence_of :amount, :position
   validates_numericality_of :amount, :position
