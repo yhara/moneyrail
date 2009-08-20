@@ -3,7 +3,9 @@ var $j = jQuery.noConflict();
 var MoneyRail = MoneyRail || {};
 
 MoneyRail.raise = function(){
-  $j.each(arguments, console.error);
+  if (console) {
+    $j.each(arguments, console.error);
+  }
   throw arguments[0];
 };
 
@@ -155,7 +157,6 @@ MoneyRail.on_input_changed = function(e){
   var item_id = $j(input).parent("td").attr("title");
   if (item_id) {
     if (is_delete(item_id)){
-      console.log("delete")
       MoneyRail.destroy_item(input, item_id, end_highlight);
     }
     else {
