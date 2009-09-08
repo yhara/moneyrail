@@ -9,7 +9,10 @@ MoneyRail.raise = function(){
   throw arguments[0];
 };
 
-// refrection
+//
+// refrections
+//
+
 MoneyRail.get_acount_id = function(input){
   var table = $j(input).parents("table");
   if(table.length == 0){
@@ -70,7 +73,9 @@ MoneyRail.insert_row = function(btn){
   $j(row).next().find("span.pushable").click(MoneyRail.on_row_button_clicked);
 };
 
+//
 // ajax
+//
 
 // Sets item[title], item[amount] and authenticity_token
 MoneyRail.ajax_data = function(input, _data){
@@ -136,7 +141,10 @@ MoneyRail.create_item = function(input, after){
   }, "json");
 };
 
+//
 // event handlers
+//
+
 MoneyRail.on_input_changed = function(e){
   var input = e.target;
   var end_highlight = function(){
@@ -184,7 +192,9 @@ MoneyRail.show_only_account = function(k){
   });
 };
 
+//
 // main
+//
 
 MoneyRail.register_events = function(){
   // register input updated
