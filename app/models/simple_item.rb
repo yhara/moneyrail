@@ -16,6 +16,15 @@ class SimpleItem < Item
       :position => item.position,
     }).reject{|x| x.id == item.id}.first
   end
+
+  def validate
+    super
+
+    # validate category
+    unless self.category && self.category.kind == self.type
+      errors.add("category", "the category is not for #{self.type}")
+    end
+  end
   
   # featues
 

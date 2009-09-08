@@ -18,11 +18,6 @@ class Item < ActiveRecord::Base
   end
 
   def validate
-    # validate category
-    unless self.category && self.category.kind == self.type
-      errors.add("category", "the category is not for #{self.type}")
-    end
-
     # validate index of day
     if same = self.class.find_conflict(self)
       errors.add("position", "position #{position} conflicts with #{same.title} (#{same.amount}, #{same.date})")
