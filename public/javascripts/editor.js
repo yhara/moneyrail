@@ -141,7 +141,7 @@ MoneyRail.on_input_changed = function(e){
   var input = e.target;
   var end_highlight = function(){
     new Effect.Highlight(input, {
-      startcolor: "#ffff99", endcolor: "#ffffff", restorecolor: "#ffffff"
+      startcolor: "#ccffff", endcolor: "#ffffff", restorecolor: "#ffffff"
     }); 
   }
   var is_delete = function(item_id){
