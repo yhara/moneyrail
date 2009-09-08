@@ -1,3 +1,9 @@
+2009-08-20  Yutaka HARA  <yhara(at)kmc.gr.jp>
+
+	* Released 0.0.2
+
+  * fix: item deletion raises an error other than firefox
+
 2009-08-19  Yutaka HARA  <yhara(at)kmc.gr.jp>
 
 	* Released 0.0.1
