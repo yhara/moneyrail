@@ -1,4 +1,8 @@
-<h2>Statictics <%= format_month(@month) %></h2>
+<h2>Statictics
+  <small><%= link_to_show_stats("<<", @month << 1) %></small>
+  <%= format_month(@month) %>
+  <small><%= link_to_show_stats(">>", @month >> 1) %></small>
+</h2>
 
 <table>
   <tr>

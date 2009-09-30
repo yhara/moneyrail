@@ -1,5 +1,13 @@
 module LogsHelper
 
+  def link_to_edit_or_show(str, month)
+    if @mode == :edit
+      link_to_edit_logs str, month
+    else
+      link_to_show_logs str, month
+    end
+  end
+
   def cell(value)
     if @mode == :edit
       "<input type='text' value='#{h value}' />"

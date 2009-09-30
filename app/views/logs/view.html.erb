@@ -1,16 +1,10 @@
-<% if @mode == :edit %>
-  <h2>
-    <small><%= link_to_edit_logs(@prev_month) %></small>
-    <%= h format_month(@current_month) %>
-    <small><%= link_to_edit_logs(@next_month) %></small>
-  </h2>
+<h2>
+  <small><%= link_to_edit_or_show("<<", @current_month << 1) %></small>
+  <%= h format_month(@current_month) %>
+  <small><%= link_to_edit_or_show(">>", @current_month >> 1) %></small>
+</h2>
+<% if @mode != :edit %>
   <%= link_to_edit_logs "(edit)", @current_month %>
-<% else %>
-  <h2>
-    <small><%= link_to_show_logs(@prev_month) %></small>
-    <%= h format_month(@current_month) %>
-    <small><%= link_to_show_logs(@next_month) %></small>
-  </h2>
 <% end %>
 
 <ul id="account_links">

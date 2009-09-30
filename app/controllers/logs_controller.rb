@@ -6,11 +6,8 @@ class LogsController < ApplicationController
     @year, @month = params[:year].to_i, params[:month].to_i
 
     # date
-    first_day = Date.new(@year, @month)
-    @month_range = first_day .. ((first_day >> 1) - 1)
-    @current_month = first_day
-    @prev_month = first_day << 1
-    @next_month = first_day >> 1
+    @current_month = Date.new(@year, @month)
+    @month_range = @current_month .. ((@current_month >> 1) - 1)
 
     # items
     @accounts = Account.all(:order => "position")
