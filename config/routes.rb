@@ -34,6 +34,10 @@ ActionController::Routing::Routes.draw do |map|
   map.edit_logs 'logs/:year/:month/edit',
     :controller => :logs, :action => 'view', :mode => :edit
 
+  # -- statistics
+  map.show_stats 'stats/:year/:month',
+    :controller => :stats, :action => 'show'
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
