@@ -48,7 +48,7 @@ class StatsController < ApplicationController
   def make_sum_row(rows)
     rows.transpose.map{|cells|
       if cells.first.class == String
-        "sum"
+        ""
       else
         cells.sum
       end
