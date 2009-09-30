@@ -1,1 +1,18 @@
 <h2>Statictics <%= format_month(@month) %></h2>
+
+<table>
+  <tr>
+    <th>account</th>
+    <% @categories.each do |category| %>
+      <th><%=h category.name %></th>
+    <% end %>
+  </tr>
+
+  <% @stat.each do |row| %>
+    <tr>
+    <% row.each do |cell| %>
+      <td><%=h cell%></td>
+    <% end %>
+    </tr>
+  <% end %>
+</table>
