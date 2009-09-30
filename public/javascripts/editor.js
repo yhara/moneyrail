@@ -172,6 +172,20 @@ MoneyRail.on_row_button_clicked = function(e){
   MoneyRail.insert_row(e.target);
 };
 
+MoneyRail.show_all_accounts = function(){
+  MoneyRail.n_accounts.times(function(i){
+    $j("#account_"+i).show();
+  });
+};
+
+MoneyRail.show_only_account = function(k){
+  MoneyRail.n_accounts.times(function(i){
+    $j("#account_"+i)[i==k ? 'show' : 'hide']();
+  });
+};
+
+// main
+
 MoneyRail.register_events = function(){
   // register input updated
   $j.each($j("input"), function(input){

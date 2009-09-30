@@ -13,15 +13,21 @@
   </h2>
 <% end %>
 
-<ul>
+<ul id="account_links">
+  <li>
+    <%= link_to_function "all",
+      "MoneyRail.show_all_accounts();" %>
+  </li>
   <% @accounts.each_with_index do |account, i| %>
-    <li><%= link_to account.name, "#account_#{i}" %></li>
+    <li><%= link_to_function account.name, 
+      "MoneyRail.show_only_account(#{i});" %></li>
   <% end %>
 </ul>
+<br class="clear">
 
 <% @accounts.each_with_index do |account, i| %>
   <%# for each account %>
-  <a name="account_<%=h i%>" />
+  <div id="account_<%=h i%>">
   <h3>
     <%=h account.name %>
     <%= link_to '△', move_up_account_path(account) %>
@@ -96,6 +102,7 @@
       </tr>
     <% end %>
   </table>
+  </div>
 <% end %>
 
 <% javascript_tag do %>
@@ -114,6 +121,8 @@
   MoneyRail.category_ids = [
     <%=h @cat_all.map{|c| c.id.to_s}.join(", ") %>
   ];
+
+  MoneyRail.n_accounts = <%=h @accounts.size %>;
 
   MoneyRail.item_update_path = function(item_id){
     var str = "<%=h update_item_path(9999) %>.json";
