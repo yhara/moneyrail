@@ -1,6 +1,16 @@
-<h2><%=h @year %>/<%=h @month %></h2>
-<% unless @mode == :edit %>
-  <%= link_to "(edit)", edit_logs_path(:year => @year, :month => @month) %>
+<% if @mode == :edit %>
+  <h2>
+    <small><%= link_to_edit_logs(@prev_month) %></small>
+    <%= h format_month(@current_month) %>
+    <small><%= link_to_edit_logs(@next_month) %></small>
+  </h2>
+  <%= link_to_edit_logs "(edit)", @current_month %>
+<% else %>
+  <h2>
+    <small><%= link_to_show_logs(@prev_month) %></small>
+    <%= h format_month(@current_month) %>
+    <small><%= link_to_show_logs(@next_month) %></small>
+  </h2>
 <% end %>
 
 <ul>
