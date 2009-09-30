@@ -64,7 +64,7 @@
           <% case item
              when Date %>
             <td>
-              <%=h item.to_s %>
+              <%=h format_date(item) %>
             </td>
 
           <% when :no_date %>
