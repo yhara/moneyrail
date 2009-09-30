@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{moneyrail}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Yutaka HARA"]
-  s.date = %q{2009-08-20}
+  s.date = %q{2009-09-30}
   s.description = %q{Household account book, written in Rails}
   s.email = %q{yutaka.hara/at/gmail.com}
   s.extra_rdoc_files = [
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.files = [
     ".gitignore",
      ".gitmodules",
-     "Changelog",
+     "HISTORY",
      "README",
      "Rakefile",
      "VERSION",
@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
      "app/controllers/home_controller.rb",
      "app/controllers/items_controller.rb",
      "app/controllers/logs_controller.rb",
+     "app/controllers/stats_controller.rb",
      "app/helpers/accounts_helper.rb",
      "app/helpers/application_helper.rb",
      "app/helpers/categories_helper.rb",
@@ -53,6 +54,7 @@ Gem::Specification.new do |s|
      "app/views/items/show.html.erb",
      "app/views/layouts/application.html.erb",
      "app/views/logs/view.html.erb",
+     "app/views/stats/show.html.erb",
      "config/boot.rb",
      "config/database.yml",
      "config/environment.rb",
@@ -157,14 +159,14 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rails>, ["= 2.3.3"])
+      s.add_runtime_dependency(%q<rails>, ["= 2.3.4"])
       s.add_runtime_dependency(%q<ruby-station-runtime>, [">= 0.0.2"])
     else
-      s.add_dependency(%q<rails>, ["= 2.3.3"])
+      s.add_dependency(%q<rails>, ["= 2.3.4"])
       s.add_dependency(%q<ruby-station-runtime>, [">= 0.0.2"])
     end
   else
-    s.add_dependency(%q<rails>, ["= 2.3.3"])
+    s.add_dependency(%q<rails>, ["= 2.3.4"])
     s.add_dependency(%q<ruby-station-runtime>, [">= 0.0.2"])
   end
 end
