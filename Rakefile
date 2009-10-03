@@ -27,6 +27,8 @@ Jeweler::Tasks.new do |gemspec|
   gemspec.description = gemspec.summary
   gemspec.authors = ["Yutaka HARA"]
   gemspec.add_dependency('rails', '= 2.3.4')
-  gemspec.add_dependency('ruby-station-runtime', '>= 0.0.2')
+  gemspec.add_dependency('ruby-station-runtime', '>= 0.0.4')
+  gemspec.add_dependency('less')
+  gemspec.add_dependency('sqlite3-ruby')
   gemspec.files.concat Dir["vendor/plugins/**/*"]
 end
