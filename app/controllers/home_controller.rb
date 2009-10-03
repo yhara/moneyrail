@@ -24,7 +24,7 @@ class HomeController < ApplicationController
   def append_current_month(months)
     current = Time.now.to_date.beginning_of_month
     unless months.include?(current)
-      months.push current
+      months.unshift current
     end
   end
 
