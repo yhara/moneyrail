@@ -3,8 +3,8 @@ class Category < ActiveRecord::Base
   validates_uniqueness_of :name
   
   def validate
-    unless %w(Income Expense Move).include?(self.kind)
-      errors.add("kind", "#{self.kind.inspect} must be either of Income, Expense, Move")
+    unless %w(Income Expense).include?(self.kind)
+      errors.add("kind", "#{self.kind.inspect} must be either of Income or Expense")
     end
   end
 
@@ -18,8 +18,6 @@ class Category < ActiveRecord::Base
       self.all(:conditions => {:kind => "Income"},  :order => "position"),
       :expense =>
       self.all(:conditions => {:kind => "Expense"}, :order => "position"),
-      :move =>
-      self.all(:conditions => {:kind => "Move"},    :order => "position") 
     }
   end
 

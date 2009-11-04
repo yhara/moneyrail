@@ -14,7 +14,6 @@ class Move < Item
       :date => item.date,
       :account_id_from => item.account_id_from,
       :account_id_to => item.account_id_to,
-      :category_id => item.category_id,
       :position => item.position,
     }).reject{|x| x.id == item.id}.first
   end
@@ -32,6 +31,5 @@ class Move < Item
     'date = #{date}',
     'account_id_from = #{account_id_from}',
     'account_id_to = #{account_id_to}',
-    'category_id = #{category_id}',
   ].join(" AND ")
 end
