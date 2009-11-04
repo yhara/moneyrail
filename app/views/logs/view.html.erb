@@ -39,7 +39,7 @@
       <th class="date" rowspan="2">
         Date
       </th>
-      <% [:expense, :income, :move].each do |kind| %>
+      <% [:expense, :income].each do |kind| %>
         <th colspan="<%= @categories[kind].length * 2 %>">
           <%=h kind.to_s.capitalize %>
         </th>
@@ -99,6 +99,94 @@
   </div>
 <% end %>
 
+<h3>
+  Move
+</h3>
+
+<div id="move">
+  <%# table %>
+  <table class="editor" title="TODO">
+    <%# first row %>
+    <tr>
+      <% if @mode == :edit %>
+      <th class="inserts" rowspan="2">
+      </th>
+      <% end %>
+      <th class="date" rowspan="2">
+        Date
+      </th>
+      <th colspan="4">
+        Move
+      </th>
+    </tr>
+
+    <tr>
+      <th class="category">
+        title
+      </th>
+      <th class="category">
+        from
+      </th>
+      <th class="category">
+        to
+      </th>
+      <th class="category">
+        amount
+      </th>
+    </tr>
+
+    <% make_moves_data.each_with_index do |(day, i, btn, row), k| %>
+      <%# for each row %>
+      <% tr_class = (k%2 == 0) ? "even" : "odd" %>
+      <tr title="<%=h day.strftime('%Y-%m-%d') %>_<%=h i %>" class="<%=h tr_class %>">
+
+        <%# first cell %>
+        <% if @mode == :edit %>
+        <td>
+          <% if btn %>
+            <span class="pushable">▽</span>
+          <% end %>
+        </td>
+        <% end %>
+
+        <% row.each do |item| %>
+          <%# for each cell %>
+
+          <% case item
+             when Date %>
+            <td>
+              <%=h format_date(item) %>
+            </td>
+
+          <% when :no_date %>
+            <td></td>
+
+          <% when Item %>
+            <td class="title" title="<%=h item.id %>">
+              <%= cell(item.title) %>
+            </td>
+            <td class="account_from" title="<%=h item.id %>">
+              <%= account_select_tag(item.account_from) %>
+            </td>
+            <td class="account_to" title="<%=h item.id %>">
+              <%= account_select_tag(item.account_to) %>
+            </td>
+            <td class="amount" title="<%=h item.id %>">
+              <%= cell(item.amount) %>
+            </td>
+
+          <% else %>
+            <td class="title"><%= cell("") %></td>
+            <td class="account_from"><%= account_select_tag() %></td>
+            <td class="account_to"><%= account_select_tag() %></td>
+            <td class="amount"><%= cell("") %></td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
 <% javascript_tag do %>
   var MoneyRail = MoneyRail || {};
 
@@ -107,7 +195,7 @@
   MoneyRail.authenticity_token = '<%=h form_authenticity_token %>';
 
   MoneyRail.category_numbers = [
-    <%=h [:expense, :income, :move].map{|kind|
+    <%=h [:expense, :income].map{|kind|
         @categories[kind].length.to_s
       }.join(", ") %>
   ];
