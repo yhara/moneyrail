@@ -15,7 +15,6 @@ class LogsController < ApplicationController
     @cat_all = [
       @categories[:expense],
       @categories[:income],
-      @categories[:move],
     ].flatten(1)
   end
   attr_reader :mode
