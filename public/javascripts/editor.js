@@ -37,19 +37,34 @@ MoneyRail.get_category_id = function(input){
   var idx = $j(td).parent().children("td." + type).index(td);
   return MoneyRail.category_ids[idx];
 };
+MoneyRail.is_moves_table = function(elem){
+  var table = $j(elem).closest("table");
+  return $j(table).attr("title") == "_moves_";
+};
 
 MoneyRail.insert_row = function(btn){
-  var make_tds = function(k){
-    return $R(1, k).map(function(i){
-      return [
-        "<td class='title'><input type='text'></td>",
-        "<td class='amount'><input type='text'></td>"
-      ];
-    });
-  };
+  if(MoneyRail.is_moves_table(btn)){
+    var select = MoneyRail.account_select_tag;
+    var tds = [
+          "<td class='title'><input type='text'></td>",
+          "<td class='account_from'>", select, "</td>",
+          "<td class='account_to'>", select, "</td>",
+          "<td class='amount'><input type='text'></td>"
+        ].join("");
+  }
+  else{
+    var tds = MoneyRail.category_numbers.map(function(k){
+          return $R(1, k).map(function(i){
+            return [
+              "<td class='title'><input type='text'></td>",
+              "<td class='amount'><input type='text'></td>"
+            ];
+          });
+        }).flatten().join("");
+  }
 
-  var a = MoneyRail.get_date_and_position(btn);
-  var date = a[0], position = Number(a[1]);
+  var d_p = MoneyRail.get_date_and_position(btn);
+  var date = d_p[0], position = Number(d_p[1]);
   var row = $j(btn).parents("tr");
   var tr_class = ($j(row).attr("class") == "odd") ? "even" : "odd";
 
@@ -67,7 +82,7 @@ MoneyRail.insert_row = function(btn){
       "<td></td>",
 
       // Inputs
-      MoneyRail.category_numbers.map(make_tds).flatten().join(""),
+      tds,
     "</tr>"
   ].join(""));
   $j(row).next().find("span.pushable").click(MoneyRail.on_row_button_clicked);
@@ -209,4 +224,5 @@ $j(function(){
     MoneyRail.register_events();
   }
 });
+
 <!-- この文字列は文字化け除けの文章です -->

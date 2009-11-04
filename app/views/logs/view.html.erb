@@ -66,7 +66,7 @@
 
 <div id="move">
   <%# table %>
-  <table class="editor" title="TODO">
+  <table class="editor" title="_moves_">
     <%# first row %>
     <tr>
       <% if @mode == :edit %>
@@ -129,6 +129,11 @@
     return str.replace(/9999/, item_id);
   };
   MoneyRail.item_create_path = "<%=h create_item_path %>.json";
+
+  MoneyRail.account_select_tag = "<%=
+      account_select_tag.gsub(/\n/, '').gsub(/("|')/){|c| '\\'+c}
+    %>";
+
 <% end %>
 
 <%= link_to 'back', root_path %>
