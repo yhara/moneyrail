@@ -17,7 +17,7 @@ test: &TEST
 
 production:
   adapter: sqlite3
-  database: <%= RubyStation.data_path("production.sqlite3") %>
+  database: <%= RubyStation.data_path("production.sqlite3") if defined?(RubyStation) %>
   pool: 5
   timeout: 5000
 
