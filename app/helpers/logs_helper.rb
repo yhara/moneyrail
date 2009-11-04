@@ -38,7 +38,7 @@ module LogsHelper
     moves = Move.all(in_month)
 
     make_table_data(moves) do |todays, i|
-      [todays.find{|m| m.position == i}]
+      [todays.find{|m| m.position == i} || :no_move]
     end
   end
 
