@@ -23,13 +23,35 @@ module LogsHelper
       "<option value='none'>--</option>" + options
   end
 
-  # returns [Date(2009/8/1), nil, nil, Income, ..]
-  def make_table_data(account)
+  def make_income_expense_data(account)
+    items = account.expenses.all(in_month) +
+            account.incomes.all(in_month)
+
+    make_table_data(items) do |todays, i|
+      @cat_all.map{|cat|
+        todays.find{|m| m.category == cat && m.position == i}
+      }
+    end
+  end
+
+  def make_moves_data
+    moves = Move.all(in_month)
+
+    make_table_data(moves) do |todays, i|
+      [todays.find{|m| m.position == i}]
+    end
+  end
+
+  private
+
+  def in_month
+    { :conditions => {:date => @month_range}}
+  end
+
+  def make_table_data(items, &row_maker)
     condition = {
       :conditions => {:date => @month_range},
     }
-    items = account.expenses.all(condition) +
-            account.incomes.all(condition)
 
     @month_range.map{|today|
       todays, items = items.partition{|m| m.date == today}
@@ -41,30 +63,8 @@ module LogsHelper
         [
           today,
           i,
-          i == max_position, 
-          @cat_all.map{|cat|
-            todays.find{|m| m.category == cat && m.position == i}
-          }.unshift(day)
-        ]
-      }
-    }.flatten(1)
-  end
-
-  def make_moves_data
-    moves = Move.all(:conditions => {:date => @month_range})
-
-    @month_range.map{|today|
-      todays, moves = moves.partition{|m| m.date == today}
-      positions = todays.map(&:position)
-      max_position = (positions.empty?) ? 0 : positions.max
-
-      (0..max_position).map{|i|
-        day = (i==0) ? today : :no_date
-        [
-          today,
-          i,
           i == max_position,
-          [day, moves.find{|m| m.position == i}]
+          row_maker.call(todays, i).unshift(day)
         ]
       }
     }.flatten(1)

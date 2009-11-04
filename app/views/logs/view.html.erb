@@ -54,7 +54,7 @@
       <% end %>
     </tr>
 
-    <% make_table_data(account).each_with_index do |(day, i, btn, row), k| %>
+    <% make_income_expense_data(account).each_with_index do |(day, i, btn, row), k| %>
       <%# for each row %>
       <% tr_class = (k%2 == 0) ? "even" : "odd" %>
       <tr title="<%=h day.strftime('%Y-%m-%d') %>_<%=h i %>" class="<%=h tr_class %>">
