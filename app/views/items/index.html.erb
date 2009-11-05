@@ -12,12 +12,13 @@
 <% @items.each do |item| %>
   <tr>
     <td><%=h item.date %></td>
-    <td><%=h item.category.name %></td>
+    <td><%=h item.category.try(:name) %></td>
     <td><%=h item.title %></td>
     <td><%=h item.amount %></td>
     <td>
       <% if item.is_a?(Move) %>
-        <%=h item.account_from.name %>→<%=h item.account_to.name %>
+        <%=h item.account_from.try(:name) || "?" %>→
+        <%=h item.account_to.try(:name) || "?" %>
       <% elsif item.is_a?(Expense) %>
         ←<%=h item.account.name %>
       <% else %>
