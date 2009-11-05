@@ -16,7 +16,7 @@ module LogsHelper
     end
   end
   
-  def select_cell(acc)
+  def select_cell(acc=nil)
     if @mode == :edit
       account_select_tag(acc)
     else
