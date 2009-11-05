@@ -37,10 +37,10 @@
           <%= cell(item.title) %>
         </td>
         <td class="account_id_from" title="<%=h item.id %>">
-          <%= account_select_tag(item.account_from) %>
+          <%= select_cell(item.account_from) %>
         </td>
         <td class="account_id_to" title="<%=h item.id %>">
-          <%= account_select_tag(item.account_to) %>
+          <%= select_cell(item.account_to) %>
         </td>
         <td class="amount" title="<%=h item.id %>">
           <%= cell(item.amount) %>

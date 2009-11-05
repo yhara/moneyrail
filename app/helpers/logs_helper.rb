@@ -15,6 +15,14 @@ module LogsHelper
       "<div>#{h value}</div>"
     end
   end
+  
+  def select_cell(acc)
+    if @mode == :edit
+      account_select_tag(acc)
+    else
+      "<div>#{h acc.name if acc}</div>"
+    end
+  end
 
   def account_select_tag(selected_account=nil)
     options = options_from_collection_for_select(@accounts, 'id', 'name',
