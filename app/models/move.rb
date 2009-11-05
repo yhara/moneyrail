@@ -6,9 +6,6 @@ class Move < Item
 
   # validations
 
-  validates_presence_of :account_from
-  validates_presence_of :account_to
-
   def self.find_conflict(item)
     Move.all(:conditions => {
       :date => item.date,
@@ -19,7 +16,7 @@ class Move < Item
   end
 
   def validate
-    if account_id_from == account_id_to
+    if account_id_from && (account_id_from == account_id_to)
       errors.add("account_id_from", "from and to must not be same")
     end
     super
