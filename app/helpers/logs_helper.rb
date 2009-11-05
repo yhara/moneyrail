@@ -20,7 +20,7 @@ module LogsHelper
     options = options_from_collection_for_select(@accounts, 'id', 'name',
                                                  selected_account.try(:id))
     select_tag "",
-      "<option value='none'>--</option>" + options
+      "<option value='_none_'>--</option>" + options
   end
 
   def make_income_expense_data(account)

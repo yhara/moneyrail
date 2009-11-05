@@ -120,6 +120,7 @@ MoneyRail.destroy_item = function(input, item_id, after){
 
   $j.post(MoneyRail.item_destroy_path(item_id), data, function(result){
     if (result[0] == "ok"){
+      // remove the deleted object_id's from attr
       $j("td[title='"+item_id+"']").attr("title", "");
 
       after();
@@ -174,9 +175,14 @@ MoneyRail.on_input_changed = function(e){
   var is_delete = function(item_id){
     var title = $j("td[class='title'][title='"+item_id+"'] input").val();
     var amount = $j("td[class='amount'][title='"+item_id+"'] input").val();
+    var from = $j("td[class='account_id_from'][title='"+item_id+"'] select").val();
+    var to = $j("td[class='account_id_to'][title='"+item_id+"'] select").val();
+    console.log(from, to);
 
     var empty = /^(\s*)$/;
-    return empty.match(title) && empty.match(amount);
+    var none = /^(_none_|)$/;
+    return empty.match(title) && empty.match(amount) &&
+           none.match(from) && none.match(to);
   }
 
   $j(input).css("background", "#ffff99");
