@@ -45,7 +45,7 @@ class ItemsController < ApplicationController
   # POST /items.xml
   def create
     @item = Item.new(params[:item])
-    @item.type = @item.category.kind
+    @item.type = (@item.category ? @item.category.kind : "Move")
     @accounts = Account.all
     @categories = Category.all
 
