@@ -50,12 +50,14 @@ table.editor {
 
   // cell
 
-  td.title, td.amount {
+  td.title, td.amount, td.account_id_from, td.account_id_to {
     min-width: @cell_width;
     width: @cell_width;
 
-    input {
-      width: 90%;
+    input{ width: 90%; }
+    select{ width: 100%; }
+
+    input, select {
       border: none;
       font-size: 100%;
       padding-left: 3px;
