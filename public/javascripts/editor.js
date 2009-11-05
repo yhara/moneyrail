@@ -47,8 +47,8 @@ MoneyRail.insert_row = function(btn){
     var select = MoneyRail.account_select_tag;
     var tds = [
           "<td class='title'><input type='text'></td>",
-          "<td class='account_from'>", select, "</td>",
-          "<td class='account_to'>", select, "</td>",
+          "<td class='account_id_from'>", select, "</td>",
+          "<td class='account_id_to'>", select, "</td>",
           "<td class='amount'><input type='text'></td>"
         ].join("");
   }
@@ -92,18 +92,22 @@ MoneyRail.insert_row = function(btn){
 // ajax
 //
 
-// Sets item[title], item[amount] and authenticity_token
+// Sets item[...] and authenticity_token
 MoneyRail.ajax_data = function(input, _data){
   var data = _data || {};
 
   if (input) {
     var type = $j(input).parent("td").attr("class");
-    if (type == "title" || type == "amount") {
-      var key = "item[" + type + "]";
-      data[key] = $j(input).val();
-    }
-    else {
-      MoneyRail.raise("unknown type: " + type);
+
+    switch(type){
+      case "title":
+      case "amount":
+      case "account_id_from":
+      case "account_id_to":
+        data["item["+type+"]"] = $j(input).val();
+        break;
+      default:
+        MoneyRail.raise("unknown type: " + type);
     }
   }
 
@@ -135,21 +139,21 @@ MoneyRail.create_item = function(input, after){
   var a = MoneyRail.get_date_and_position(input);
   var data = MoneyRail.ajax_data(input, {
     "item[date]": a[0],
-    "item[position]": a[1],
-    "item[account_id]": MoneyRail.get_acount_id(input),
-    "item[category_id]": MoneyRail.get_category_id(input),
+    "item[position]": a[1]
   });
+  if( ! MoneyRail.is_moves_table(input) ){
+    data["item[account_id]"] = MoneyRail.get_acount_id(input);
+    data["item[category_id]"] = MoneyRail.get_category_id(input);
+  }
 
   $j.post(MoneyRail.item_create_path, data, function(result){
     if (result[0] == "ok"){
-      var td = $j(input).parent("td");
-      td.attr("title", result[1]);
-      if (td.attr("class") == "title"){
-        td.next().attr("title", result[1]);
-      }
-      else {
-        td.prev().attr("title", result[1]);
-      }
+      var object_id = result[1]
+
+      var tds = $j(input).closest("tr").children("td");
+      tds.attr("title", object_id);
+      // Note: the above code adds title to all the td's,
+      // including that of date and row button. This is harmless.
       
       after();
     }
@@ -168,10 +172,10 @@ MoneyRail.on_input_changed = function(e){
     }); 
   }
   var is_delete = function(item_id){
-    var empty = /^(\s*)$/;
     var title = $j("td[class='title'][title='"+item_id+"'] input").val();
     var amount = $j("td[class='amount'][title='"+item_id+"'] input").val();
 
+    var empty = /^(\s*)$/;
     return empty.match(title) && empty.match(amount);
   }
 
