@@ -58,7 +58,7 @@ class ItemsController < ApplicationController
         format.xml  { render :xml => @item, :status => :created, :location => @item }
         format.json { render :text => "['ok', #{@item.id}]" }
       else
-        logger.debug @item.errors.inspect
+        @item.errors.each{|err| logger.debug err.inspect}
         format.html { render :action => "new" }
         format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
         format.json { render :text => "['error']" }
@@ -82,7 +82,7 @@ class ItemsController < ApplicationController
         format.xml  { head :ok }
         format.json { render :text => "['ok']" }
       else
-        logger.debug @item.errors.inspect
+        @item.errors.each{|err| logger.debug err.inspect}
         format.html { render :action => "edit" }
         format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
         format.json { render :text => "['error']" }
