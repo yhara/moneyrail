@@ -179,9 +179,11 @@ MoneyRail.on_input_changed = function(e){
     var to = $j("td[class='account_id_to'][title='"+item_id+"'] select").val();
 
     var empty = /^(\s*)$/;
-    var none = /^(_none_|)$/;
-    return empty.match(title) && empty.match(amount) &&
-           none.match(from) && none.match(to);
+    var none = /^_none_$/;
+    return empty.match(title) &&
+           empty.match(amount) &&
+           (!from || none.match(from)) &&
+           (!to || none.match(to));
   }
 
   $j(input).css("background", "#ffff99");
