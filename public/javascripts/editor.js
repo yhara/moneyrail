@@ -177,7 +177,6 @@ MoneyRail.on_input_changed = function(e){
     var amount = $j("td[class='amount'][title='"+item_id+"'] input").val();
     var from = $j("td[class='account_id_from'][title='"+item_id+"'] select").val();
     var to = $j("td[class='account_id_to'][title='"+item_id+"'] select").val();
-    console.log(from, to);
 
     var empty = /^(\s*)$/;
     var none = /^(_none_|)$/;
