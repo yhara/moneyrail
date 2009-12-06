@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{moneyrail}
-  s.version = "0.1.1"
+  s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Yutaka HARA"]
-  s.date = %q{2009-11-03}
+  s.date = %q{2009-12-06}
   s.description = %q{Household account book, written in Rails}
   s.email = %q{yutaka.hara/at/gmail.com}
   s.extra_rdoc_files = [
@@ -56,6 +56,7 @@ Gem::Specification.new do |s|
      "app/views/items/new.html.erb",
      "app/views/items/show.html.erb",
      "app/views/layouts/application.html.erb",
+     "app/views/logs/_table_rows.html.erb",
      "app/views/logs/view.html.erb",
      "app/views/stats/show.html.erb",
      "config/boot.rb",
