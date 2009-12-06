@@ -149,12 +149,22 @@ MoneyRail.create_item = function(input, after){
 
   $j.post(MoneyRail.item_create_path, data, function(result){
     if (result[0] == "ok"){
-      var object_id = result[1]
+      var object_id = result[1];
 
-      var tds = $j(input).closest("tr").children("td");
-      tds.attr("title", object_id);
-      // Note: the above code adds title to all the td's,
-      // including that of date and row button. This is harmless.
+      if (MoneyRail.is_moves_table(input)){
+        var tds = $j(input).closest("tr").children("td");
+        tds.attr("title", object_id);
+      }
+      else {
+        var td = $j(input).parent("td");
+        td.attr("title", object_id);
+        if (td.attr("class") == "title"){
+          td.next().attr("title", object_id);
+        }
+        else {
+          td.prev().attr("title", object_id);
+        }
+      }
       
       after();
     }
