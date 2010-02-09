@@ -1,20 +1,28 @@
 class StatsController < ApplicationController
 
   def month
+    @mode = :month
+
     year = params[:year].to_i
     month = params[:month].to_i
 
     @month = Date.new(year, month)
 
     @stat = make_month_stats(@month)
+
+    render :show
   end
 
   def year
+    @mode = :year
+
     year = params[:year].to_i
 
     @year = Date.new(year)
 
     @stat = make_year_stats(@year)
+
+    render :show
   end
 
   private

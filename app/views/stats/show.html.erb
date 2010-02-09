@@ -1,7 +1,13 @@
 <h2>Statictics
-  <small><%= link_to_show_year_stats("<<", @year-365) %></small>
-  <%= format_year(@year) %>
-  <small><%= link_to_show_year_stats(">>", @year+365) %></small>
+  <% if @mode == :year %>
+    <small><%= link_to_show_year_stats("<<", @year-365) %></small>
+    <%= format_year(@year) %>
+    <small><%= link_to_show_year_stats(">>", @year+365) %></small>
+  <% else %>
+    <small><%= link_to_show_month_stats("<<", @month << 1) %></small>
+    <%= format_month(@month) %>
+    <small><%= link_to_show_month_stats(">>", @month >> 1) %></small>
+  <% end %>
 </h2>
 
 <table class="stats">
