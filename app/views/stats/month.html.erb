@@ -8,15 +8,20 @@
   <%# row 1: Expense and Income %>
   <tr>
     <th rowspan="2"></th>
-    <th colspan="<%= Category.expenses.size %>">Expense</th>
-    <th colspan="<%= Category.incomes.size  %>">Income</th>
+    <th colspan="<%= Category.expenses.size + 1 %>">Expense</th>
+    <th colspan="<%= Category.incomes.size  + 1 %>">Income</th>
   </tr>
 
   <%# row 2: Categories %>
   <tr>
-    <% @categories.each do |category| %>
+    <% Category.expenses.each do |category| %>
       <th><%=h category.name %></th>
     <% end %>
+      <th>sum</th>
+    <% Category.incomes.each do |category| %>
+      <th><%=h category.name %></th>
+    <% end %>
+      <th>sum</th>
   </tr>
 
   <%# row 3-: stat %>

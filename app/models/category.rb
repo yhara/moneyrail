@@ -29,9 +29,4 @@ class Category < ActiveRecord::Base
     self.all(:conditions => {:kind => "Expense"})
   end
 
-  def self.expenses_and_incomes
-    self.all(:conditions => {:kind => "Expense"}) +
-    self.all(:conditions => {:kind => "Income"})
-  end
-
 end

@@ -5,11 +5,8 @@ class StatsController < ApplicationController
     month = params[:month].to_i
 
     @month = Date.new(year, month)
-    @month_range = @month .. ((@month >> 1) - 1)
 
-    @categories = Category.hashed.values_at(:expense, :income).flatten(1)
-
-    @stat = make_month_stats
+    @stat = make_month_stats(@month)
   end
 
   def year
@@ -17,7 +14,7 @@ class StatsController < ApplicationController
 
     @year = Date.new(year)
 
-    @stat = make_year_stats(year)
+    @stat = make_year_stats(@year)
   end
 
   private
@@ -32,39 +29,18 @@ class StatsController < ApplicationController
   # acc2   12   34  567   8   x     9     0   y
   # ------------------------------------
   # sum    
-  def make_month_stats
-    make_stat_row = lambda{|account, items|
-      row = @categories.map{|category|
-        if items[category]
-          items[category].
-            find_all{|item| item.account == account}.
-            map{|item| item.amount}.
-            sum
-        else
-          0
-        end
-      }
-      row.unshift(account.name)
-    }
-    make_sum_row = lambda{|rows|
-      rows.transpose.map{|cells|
-        if cells.first.class == String
-          "sum"
-        else
-          cells.sum
-        end
-      }
+  def make_month_stats(month)
+    rows = Account.all(:order => "position").map{|account|
+      items = Item.all(:conditions => {
+        :account_id => account.id,
+        :date => month_range(month), 
+        :type => ["Expense", "Income"]
+      }).group_by(&:category)
+
+      make_row(account.name, items)
     }
 
-    items = Item.all(:conditions => {:date => @month_range, :type => ["Expense", "Income"]}).group_by(&:category)
-
-    accounts = Account.all(:order => "position")
-
-    rows = accounts.map{|account|
-      make_stat_row.call(account, items)
-    }
-
-    return rows.push make_sum_row.call(rows)
+    return rows.push make_sum_row(rows)
   end
 
   #   -       Expense            Income
@@ -74,41 +50,42 @@ class StatsController < ApplicationController
   # ------------------------------------
   # sum    
   def make_year_stats(year)
-    make_row = lambda{|month, items|
-      expenses = Category.expenses.map{|category|
-        (items[category] || []).map(&:amount).sum
-      }
-      incomes = Category.incomes.map{|category|
-        (items[category] || []).map(&:amount).sum
-      }
-
-      [month] + 
-      expenses +
-      [expenses.sum] +
-      incomes +
-      [incomes.sum]
-    }
-    make_sum_row = lambda{|rows|
-      rows.transpose.map{|cells|
-        if cells.first.class == Date
-          "sum"
-        else
-          cells.sum
-        end
-      }
-    }
-
-    rows = (1..12).map{|m| 
-      month = Date.new(year, m)
+    rows = (0...12).map{|m| 
+      month = year >> m
 
       items = Item.all(:conditions => {
         :date => month_range(month),
         :type => ["Expense", "Income"]
       }).group_by(&:category)
 
-      make_row.call(month, items)
+      make_row(month, items)
     }
 
-    return rows.push make_sum_row.call(rows)
+    return rows.push make_sum_row(rows)
+  end
+
+  def make_row(header, items)
+    expenses = Category.expenses.map{|category|
+      (items[category] || []).map(&:amount).sum
+    }
+    incomes = Category.incomes.map{|category|
+      (items[category] || []).map(&:amount).sum
+    }
+
+    [header] + 
+    expenses +
+    [expenses.sum] +
+    incomes +
+    [incomes.sum]
+  end
+
+  def make_sum_row(rows)
+    rows.transpose.map{|cells|
+      if cells.first.is_a? Numeric
+        cells.sum
+      else
+        "sum"
+      end
+    }
   end
 end
