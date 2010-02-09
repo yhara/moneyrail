@@ -1,0 +1,22 @@
+<h2>Statictics
+  <small><%= link_to_show_year_stats("<<", @year-365) %></small>
+  <%= format_year(@year) %>
+  <small><%= link_to_show_year_stats(">>", @year+365) %></small>
+</h2>
+
+<table>
+  <tr>
+    <th>month</th>
+    <% @categories.each do |category| %>
+      <th><%=h category.name %></th>
+    <% end %>
+  </tr>
+
+  <% @stat.each do |row| %>
+    <tr>
+    <% row.each do |cell| %>
+      <td><%=h cell%></td>
+    <% end %>
+    </tr>
+  <% end %>
+</table>
