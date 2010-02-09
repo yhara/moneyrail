@@ -22,8 +22,13 @@
   <%# row 3-: stat %>
   <% @stat.each do |row| %>
     <tr>
-    <% row.each do |cell| %>
-      <td><%=h cell%></td>
+    <% row.each do |item| %>
+      <% case item 
+         when Date %>
+        <td><%= link_to_show_month_stats(item) %></td>
+      <% else %>
+        <td><%=h item %></td>
+      <% end %>
     <% end %>
     </tr>
   <% end %>

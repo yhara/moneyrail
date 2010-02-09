@@ -1,5 +1,4 @@
 class StatsController < ApplicationController
-  include ApplicationHelper
 
   def month
     year = params[:year].to_i
@@ -87,11 +86,11 @@ class StatsController < ApplicationController
           0
         end
       }
-      row.unshift(format_month(month))
+      row.unshift(month)
     }
     make_sum_row = lambda{|rows|
       rows.transpose.map{|cells|
-        if cells.first.class == String
+        if cells.first.class == Date
           "sum"
         else
           cells.sum
