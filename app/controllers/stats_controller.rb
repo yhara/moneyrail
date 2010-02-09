@@ -84,7 +84,8 @@ class StatsController < ApplicationController
     expenses +
     [expenses.sum] +
     incomes +
-    [incomes.sum]
+    [incomes.sum] + 
+    [incomes.sum - expenses.sum]
   end
 
   def make_sum_row(rows)
