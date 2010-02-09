@@ -17,7 +17,12 @@ class StatsController < ApplicationController
 
     @year = Date.new(year)
 
-    @categories = Category.hashed.values_at(:expense, :income).flatten(1)
+    @categories = [
+      Category.expenses,
+      [Category.expenses],
+      Category.incomes,
+      [Category.incomes],
+    ].flatten(1)
 
     @stat = make_year_stats(year)
   end
@@ -28,10 +33,10 @@ class StatsController < ApplicationController
     month.beginning_of_month .. month.end_of_month
   end
 
-  #  -        Expense            Income
-  #  -   cat1 cat2 cat3 cat4   cat5 cat6
-  # acc1   99   99   99   0      0    33
-  # acc2   12   34  567   8      9     0
+  #  -        Expense                Income
+  #  -   cat1 cat2 cat3 cat4 sum  cat5 cat6 sum
+  # acc1   99   99   99   0   x     0    33   y
+  # acc2   12   34  567   8   x     9     0   y
   # ------------------------------------
   # sum    
   def make_month_stats
@@ -77,13 +82,16 @@ class StatsController < ApplicationController
   # sum    
   def make_year_stats(year)
     make_row = lambda{|month, items|
-      row = @categories.map{|category|
-        if items[category]
-          items[category].
-            map{|item| item.amount}.
-            sum
-        else
-          0
+      row = @categories.map{|target|
+        case target
+        when Category
+          items[target] ||= []
+          items[target].map(&:amount).sum
+        when Array # of categories
+          target.map{|category|
+            items[category].map(&:amount)
+          }.flatten.sum
+        else raise
         end
       }
       row.unshift(month)
