@@ -5,9 +5,7 @@ class StatsController < ApplicationController
 
     year = params[:year].to_i
     month = params[:month].to_i
-
     @month = Date.new(year, month)
-
     @stat = make_month_stats(@month)
 
     render :show
@@ -17,10 +15,19 @@ class StatsController < ApplicationController
     @mode = :year
 
     year = params[:year].to_i
-
     @year = Date.new(year)
+    months = (0...12).map{|i| @year >> i}
+    @stat = make_year_stats(months)
 
-    @stat = make_year_stats(@year)
+    render :show
+  end
+
+  def recent
+    @mode = :recent
+
+    now = DateTime.now.beginning_of_month
+    months = (0...12).map{|i| now << i}.reverse
+    @stat = make_year_stats(months)
 
     render :show
   end
@@ -57,10 +64,8 @@ class StatsController < ApplicationController
   # 200902   12   34  567   8      9     0
   # ------------------------------------
   # sum    
-  def make_year_stats(year)
-    rows = (0...12).map{|m| 
-      month = year >> m
-
+  def make_year_stats(months)
+    rows = months.map{|month|
       items = Item.all(:conditions => {
         :date => month_range(month),
         :type => ["Expense", "Income"]
