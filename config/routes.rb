@@ -35,7 +35,7 @@ ActionController::Routing::Routes.draw do |map|
     :controller => :logs, :action => 'view', :mode => :edit
 
   # -- statistics
-  map.connect 'stats/recent',
+  map.show_recent_stats 'stats/recent',
     :controller => :stats, :action => 'recent'
   map.show_month_stats 'stats/:year/:month',
     :controller => :stats, :action => 'month'

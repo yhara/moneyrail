@@ -32,7 +32,7 @@ module ApplicationHelper
   end
 
   def link_to_show_year_stats(a, b=nil)
-    str, date = str_and_date(a, b)
+    str, date = b ? [a, b] : [format_year(a), a]
 
     link_to str, show_year_stats_path(:year => date.year)
   end

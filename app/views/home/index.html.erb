@@ -3,8 +3,14 @@
   <li><%= link_to 'Categories', categories_path %></li>
   <li><%= link_to 'Items', items_path %></li>
 </ul>
+
+<h2>Logs</h2>
+<%= link_to 'Recent stats', show_recent_stats_path %>
+
+<% @months.each do |year, months| %>
+<h3><%= link_to_show_year_stats(Date.new(year)) %></h3>
 <ul>
-  <% @months.each do |m| %>
+  <% months.each do |m| %>
     <li>
       <%= link_to "Logs: #{m.year}-#{m.month}",
         show_logs_path(:year => m.year, :month => m.month) %>
@@ -15,3 +21,4 @@
     </li>
   <% end %>
 </ul>
+<% end %>

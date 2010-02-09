@@ -1,9 +1,11 @@
 class HomeController < ApplicationController
 
   def index
-    @months = []
-    collect_months(@months)
-    append_current_month(@months)
+    months = []
+    collect_months(months)
+    append_current_month(months)
+
+    @months = months.group_by(&:year)
   end
 
   private
