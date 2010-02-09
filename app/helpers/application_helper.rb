@@ -21,10 +21,10 @@ module ApplicationHelper
     link_to str, show_logs_path(:year => date.year, :month => date.month)
   end
 
-  def link_to_show_stats(a, b=nil)
+  def link_to_show_month_stats(a, b=nil)
     str, date = str_and_date(a, b)
 
-    link_to str, show_stats_path(:year => date.year, :month => date.month)
+    link_to str, show_month_stats_path(:year => date.year, :month => date.month)
   end
 
   private

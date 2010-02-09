@@ -1,5 +1,5 @@
 class StatsController < ApplicationController
-  def show
+  def month
     year = params[:year].to_i
     month = params[:month].to_i
 
@@ -8,7 +8,7 @@ class StatsController < ApplicationController
 
     @categories = Category.hashed.values_at(:expense, :income).flatten(1)
 
-    @stat = make_stats
+    @stat = make_month_stats
   end
 
   private
@@ -19,39 +19,39 @@ class StatsController < ApplicationController
   # acc2   12   34  567   8      9     0
   # ------------------------------------
   # sum    
-  def make_stats
+  def make_month_stats
+    make_stat_row = lambda{|account, items|
+      row = @categories.map{|category|
+        if items[category]
+          items[category].
+            find_all{|item| item.account == account}.
+            map{|item| item.amount}.
+            sum
+        else
+          0
+        end
+      }
+      row.unshift(account.name)
+    }
+    make_sum_row = lambda{|rows|
+      rows.transpose.map{|cells|
+        if cells.first.class == String
+          ""
+        else
+          cells.sum
+        end
+      }
+    }
+
     items = Item.all(:conditions => {:date => @month_range, :type => ["Expense", "Income"]}).group_by(&:category)
 
     accounts = Account.all(:order => "position")
 
     rows = accounts.map{|account|
-      make_stat_row(account, items)
+      make_stat_row.call(account, items)
     }
 
-    return rows.push make_sum_row(rows)
+    return rows.push make_sum_row.call(rows)
   end
 
-  def make_stat_row(account, items)
-    row = @categories.map{|category|
-      if items[category]
-        items[category].
-          find_all{|item| item.account == account}.
-          map{|item| item.amount}.
-          sum
-      else
-        0
-      end
-    }
-    row.unshift(account.name)
-  end
-
-  def make_sum_row(rows)
-    rows.transpose.map{|cells|
-      if cells.first.class == String
-        ""
-      else
-        cells.sum
-      end
-    }
-  end
 end
