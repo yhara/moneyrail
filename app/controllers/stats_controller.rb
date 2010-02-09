@@ -17,13 +17,6 @@ class StatsController < ApplicationController
 
     @year = Date.new(year)
 
-    @categories = [
-      Category.expenses,
-      [Category.expenses],
-      Category.incomes,
-      [Category.incomes],
-    ].flatten(1)
-
     @stat = make_year_stats(year)
   end
 
@@ -82,19 +75,18 @@ class StatsController < ApplicationController
   # sum    
   def make_year_stats(year)
     make_row = lambda{|month, items|
-      row = @categories.map{|target|
-        case target
-        when Category
-          items[target] ||= []
-          items[target].map(&:amount).sum
-        when Array # of categories
-          target.map{|category|
-            items[category].map(&:amount)
-          }.flatten.sum
-        else raise
-        end
+      expenses = Category.expenses.map{|category|
+        (items[category] || []).map(&:amount).sum
       }
-      row.unshift(month)
+      incomes = Category.incomes.map{|category|
+        (items[category] || []).map(&:amount).sum
+      }
+
+      [month] + 
+      expenses +
+      [expenses.sum] +
+      incomes +
+      [incomes.sum]
     }
     make_sum_row = lambda{|rows|
       rows.transpose.map{|cells|
