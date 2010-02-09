@@ -7,7 +7,9 @@
 
   <%= stylesheet_link_tag 'scaffold' %>
 
-  <% if controller.controller_name == "logs" %>
+  <% case controller.controller_name
+     when "logs" %>
+
     <title>MoneyRail : Logs: <%=h @year %>/<%=h @month %></title>
     <%= stylesheet_link_tag 'editor' %>
 
@@ -17,6 +19,10 @@
       <%= javascript_include_tag 'jquery' %>
       <%= javascript_include_tag 'editor' %>
     <% end %>
+
+  <% when "stats" %>
+    <%= stylesheet_link_tag 'stats' %>
+
   <% else %>
     <title>MoneyRail :
       <%=h controller.controller_name.camelcase %>:
