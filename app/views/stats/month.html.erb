@@ -5,13 +5,21 @@
 </h2>
 
 <table class="stats">
+  <%# row 1: Expense and Income %>
   <tr>
-    <th>account</th>
+    <th rowspan="2"></th>
+    <th colspan="<%= Category.expenses.size %>">Expense</th>
+    <th colspan="<%= Category.incomes.size  %>">Income</th>
+  </tr>
+
+  <%# row 2: Categories %>
+  <tr>
     <% @categories.each do |category| %>
       <th><%=h category.name %></th>
     <% end %>
   </tr>
 
+  <%# row 3-: stat %>
   <% @stat.each do |row| %>
     <tr>
     <% row.each do |cell| %>
