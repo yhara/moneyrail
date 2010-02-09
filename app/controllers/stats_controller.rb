@@ -29,8 +29,8 @@ class StatsController < ApplicationController
     month.beginning_of_month .. month.end_of_month
   end
 
-  #           Expense            Income
-  #      cat1 cat2 cat3 cat4   cat5 cat6
+  #  -        Expense            Income
+  #  -   cat1 cat2 cat3 cat4   cat5 cat6
   # acc1   99   99   99   0      0    33
   # acc2   12   34  567   8      9     0
   # ------------------------------------
@@ -70,8 +70,8 @@ class StatsController < ApplicationController
     return rows.push make_sum_row.call(rows)
   end
 
-  #           Expense            Income
-  #        cat1 cat2 cat3 cat4   cat5 cat6
+  #   -       Expense            Income
+  # month    cat1 cat2 cat3 cat4   cat5 cat6
   # 200901   99   99   99   0      0    33
   # 200902   12   34  567   8      9     0
   # ------------------------------------

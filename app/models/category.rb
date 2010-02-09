@@ -21,4 +21,12 @@ class Category < ActiveRecord::Base
     }
   end
 
+  def self.incomes
+    self.all(:conditions => {:kind => "Income"})
+  end
+
+  def self.expenses
+    self.all(:conditions => {:kind => "Expense"})
+  end
+
 end
