@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{moneyrail}
-  s.version = "0.1.4"
+  s.version = "0.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Yutaka HARA"]
-  s.date = %q{2009-12-06}
+  s.date = %q{2010-02-12}
   s.description = %q{Household account book, written in Rails}
   s.email = %q{yutaka.hara/at/gmail.com}
   s.extra_rdoc_files = [
@@ -102,6 +102,7 @@ Gem::Specification.new do |s|
      "public/robots.txt",
      "public/stylesheets/editor.less",
      "public/stylesheets/scaffold.css",
+     "public/stylesheets/stats.less",
      "script/about",
      "script/autospec",
      "script/console",
@@ -156,7 +157,10 @@ Gem::Specification.new do |s|
      "spec/models/category_spec.rb",
      "spec/models/income_spec.rb",
      "spec/models/item_spec.rb",
-     "spec/spec_helper.rb"
+     "spec/spec_helper.rb",
+     "test/functional/notes_controller_test.rb",
+     "test/unit/helpers/notes_helper_test.rb",
+     "test/unit/note_test.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -164,18 +168,18 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rails>, ["= 2.3.4"])
+      s.add_runtime_dependency(%q<rails>, ["= 2.3.5"])
       s.add_runtime_dependency(%q<ruby-station-runtime>, [">= 0.0.4"])
       s.add_runtime_dependency(%q<less>, [">= 0"])
       s.add_runtime_dependency(%q<sqlite3-ruby>, [">= 0"])
     else
-      s.add_dependency(%q<rails>, ["= 2.3.4"])
+      s.add_dependency(%q<rails>, ["= 2.3.5"])
       s.add_dependency(%q<ruby-station-runtime>, [">= 0.0.4"])
       s.add_dependency(%q<less>, [">= 0"])
       s.add_dependency(%q<sqlite3-ruby>, [">= 0"])
     end
   else
-    s.add_dependency(%q<rails>, ["= 2.3.4"])
+    s.add_dependency(%q<rails>, ["= 2.3.5"])
     s.add_dependency(%q<ruby-station-runtime>, [">= 0.0.4"])
     s.add_dependency(%q<less>, [">= 0"])
     s.add_dependency(%q<sqlite3-ruby>, [">= 0"])
