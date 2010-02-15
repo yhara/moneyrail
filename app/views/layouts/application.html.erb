@@ -5,12 +5,26 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
+  <%# title %>
+  <% case controller.controller_name
+     when "logs" %>
+
+    <title>MoneyRail : Logs: <%=h @year %>/<%=h @month %></title>
+
+  <% else %>
+    <title>MoneyRail :
+      <%=h controller.controller_name.camelcase %>:
+      <%= controller.action_name %>
+    </title>
+
+  <% end %>
+
+  <%# js, css %>
   <%= stylesheet_link_tag 'scaffold' %>
 
   <% case controller.controller_name
      when "logs" %>
 
-    <title>MoneyRail : Logs: <%=h @year %>/<%=h @month %></title>
     <%= stylesheet_link_tag 'editor' %>
 
     <% if controller.mode == :edit %>
@@ -23,11 +37,6 @@
   <% when "stats" %>
     <%= stylesheet_link_tag 'stats' %>
 
-  <% else %>
-    <title>MoneyRail :
-      <%=h controller.controller_name.camelcase %>:
-      <%= controller.action_name %>
-    </title>
   <% end %>
 </head>
 <body>
