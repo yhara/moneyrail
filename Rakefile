@@ -5,7 +5,7 @@ require(File.join(File.dirname(__FILE__), 'config', 'boot'))
 
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
+require 'rdoc/task'
 
 require 'tasks/rails'
 
@@ -26,9 +26,10 @@ Jeweler::Tasks.new do |gemspec|
   gemspec.homepage = "http://github.com/yhara/#{PROJECT_NAME}"
   gemspec.description = gemspec.summary
   gemspec.authors = ["Yutaka HARA"]
-  gemspec.add_dependency('rails', '= 2.3.5')
-  gemspec.add_dependency('ruby-station-runtime', '>= 0.0.4')
-  gemspec.add_dependency('less')
-  gemspec.add_dependency('sqlite3-ruby')
+  gemspec.add_dependency('rails', '= 2.3.12')
+  gemspec.add_dependency('sqlite3')
+  gemspec.add_development_dependency('test-unit', '= 1.2.3')
+  gemspec.add_development_dependency('jeweler')
+  gemspec.add_dependency('rake')
   gemspec.files.concat Dir["vendor/plugins/**/*"]
 end
