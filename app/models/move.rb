@@ -29,4 +29,22 @@ class Move < Item
     'account_id_from = #{account_id_from}',
     'account_id_to = #{account_id_to}',
   ].join(" AND ")
+
+  def find_position
+    klass = self.class
+    items = klass.all(conditions: {
+      date: self.date,
+      account_id_from: self.account_id_from,
+      account_id_to: self.account_id_to,
+    })
+
+    n = 0
+    loop do
+      if items.none?{|item| item.position == n}
+        $stderr.puts "[find_position] #{n}"
+        return n
+      end
+      n += 1
+    end
+  end
 end

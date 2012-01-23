@@ -33,4 +33,22 @@ class SimpleItem < Item
     'account_id = #{account_id}',
     'category_id = #{category_id}',
   ].join(" AND ")
+
+  def find_position
+    klass = self.class
+    items = klass.all(conditions: {
+      date: self.date,
+      account_id: self.account_id,
+      category_id: self.category_id
+    })
+
+    n = 0
+    loop do
+      if items.none?{|item| item.position == n}
+        $stderr.puts "[find_position] #{n}"
+        return n
+      end
+      n += 1
+    end
+  end
 end
